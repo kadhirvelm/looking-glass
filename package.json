@@ -4,11 +4,14 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "compile": "tsc ."
+    "build": "tsc --project .",
+    "dev": "yarn build --watch",
+    "ping": "node ./dist/ping-internet.js"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@types/node": "^12.12.8",
     "typescript": "^3.7.2"
   }
 }
