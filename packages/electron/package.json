@@ -1,0 +1,25 @@
+{
+  "name": "@looking-glass/electron",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc --project . && cp src/*.html dist/",
+    "dev": "yarn build && yarn watch",
+    "start": "electron ./dist/index.js",
+    "watch": "tsc --project . --watch & yarn start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kadhirvelm/looking-glass.git"
+  },
+  "author": "kadhirvelm",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kadhirvelm/looking-glass/issues"
+  },
+  "homepage": "https://github.com/kadhirvelm/looking-glass#readme",
+  "devDependencies": {
+    "electron": "^7.1.7"
+  }
+}
