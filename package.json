@@ -1,17 +1,22 @@
 {
-  "name": "side-projects",
+  "name": "looking-glass",
   "version": "0.1.0",
-  "description": "",
-  "main": "index.js",
+  "description": "A desktop application that allows you to see patterns in data.",
+  "dependencies": {
+    "typescript": "^3.7.2"
+  },
+  "devDependencies": {},
   "scripts": {
-    "build": "tsc --project .",
-    "dev": "yarn build --watch",
-    "ping": "node ./dist/ping-internet.js"
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kadhirvelm/looking-glass.git"
   },
   "author": "",
-  "license": "ISC",
-  "devDependencies": {
-    "@types/node": "^12.12.8",
-    "typescript": "^3.7.2"
-  }
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kadhirvelm/looking-glass/issues"
+  },
+  "homepage": "https://github.com/kadhirvelm/looking-glass#readme"
 }
