@@ -1,0 +1,17 @@
+{
+  "name": "@looking-glass/server-side",
+  "version": "0.2.0",
+  "description": "",
+  "main": "./dist/index.js",
+  "scripts": {
+    "build": "tsc --project .",
+    "dev": "yarn build --watch",
+    "ping": "node ./dist/ping-internet.js"
+  },
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^12.12.8",
+    "typescript": "^3.7.2"
+  }
+}
