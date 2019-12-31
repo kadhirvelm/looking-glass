@@ -1,17 +1,26 @@
 {
   "name": "@looking-glass/server-side",
-  "version": "0.2.0",
+  "version": "1.0.0",
   "description": "",
-  "main": "./dist/index.js",
+  "main": "dist/index.js",
+  "dependencies": {},
+  "devDependencies": {
+    "@types/node": "^12.12.8",
+    "typescript": "^3.7.2"
+  },
   "scripts": {
     "build": "tsc --project .",
     "dev": "yarn build --watch",
     "ping": "node ./dist/ping-internet.js"
   },
-  "author": "",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kadhirvelm/looking-glass.git"
+  },
+  "author": "kadhirvelm",
   "license": "MIT",
-  "devDependencies": {
-    "@types/node": "^12.12.8",
-    "typescript": "^3.7.2"
-  }
+  "bugs": {
+    "url": "https://github.com/kadhirvelm/looking-glass/issues"
+  },
+  "homepage": "https://github.com/kadhirvelm/looking-glass#readme"
 }
