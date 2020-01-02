@@ -1,0 +1,12 @@
+{
+    "extends": "../../tsconfig.json",
+    "compilerOptions": {
+        "outDir": "./dist",
+        "sourceMap": true,
+        "allowJs": true,
+        "noImplicitAny": true,
+        "jsx": "react"
+    },
+    "include": ["./src/*"],
+    "exclude": ["./webpack.config.js"]
+}
