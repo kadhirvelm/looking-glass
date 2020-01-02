@@ -24,6 +24,7 @@ jobs:
         docker:
             - image: circleci/node:10.18.0
         steps:
+            - checkout
             - restore_cache:
                 keys:
                     - v1-dependencies-{{ checksum "package.json" }}
@@ -38,6 +39,7 @@ jobs:
         docker:
             - image: circleci/node:10.18.0
         steps:
+            - checkout
             - restore_cache:
                 keys:
                     - v1-dependencies-{{ checksum "package.json" }}
