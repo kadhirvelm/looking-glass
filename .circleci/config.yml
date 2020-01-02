@@ -47,9 +47,9 @@ jobs:
         build:
             jobs:
                 - setup
-                - build
+                - build:
                     requires:
                         - setup
-                - lint
+                - lint:
                     requires:
                         - setup
