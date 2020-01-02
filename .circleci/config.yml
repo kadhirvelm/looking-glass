@@ -26,7 +26,8 @@ jobs:
                     keys:
                         - v1-dependencies-{{ checksum "package.json" }}
                         - v1-dependencies-
-                - yarn
+                - run:
+                    - yarn
                 - save_cache:
                     paths:
                         - node_modules
@@ -35,12 +36,14 @@ jobs:
             docker:
                 - image: circleci/node:10.9.0
             steps:
-                - yarn build
+                - run:
+                    - yarn build
         lint:
             docker:
                 - image: circleci/node:10.9.0
             steps:
-                - yarn lint
+                - run:
+                    - yarn lint
 
     workflows:
         version: 2
