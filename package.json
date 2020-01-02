@@ -7,16 +7,31 @@
   },
   "private": true,
   "devDependencies": {
-    "lerna": "^3.20.1"
+    "@typescript-eslint/eslint-plugin": "^2.7.0",
+    "@typescript-eslint/parser": "^2.14.0",
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb-typescript": "^6.3.1",
+    "eslint-config-prettier": "^6.9.0",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-prettier": "^3.1.2",
+    "eslint-plugin-react": "^7.15.1",
+    "eslint-plugin-react-hooks": "^1.7.0",
+    "lerna": "^3.20.1",
+    "prettier": "^1.19.1"
   },
   "workspaces": [
     "packages/*"
   ],
   "scripts": {
-    "update-version": "lerna publish --skip-git --skip-npm --force-publish '*'",
     "interface": "cd packages/interface && yarn dev",
     "electron": "cd packages/electron && yarn dev",
-    "dev": "yarn interface & yarn electron"
+    "dev": "yarn interface & yarn electron",
+  
+    "build": "lerna run build",
+    "lint": "lerna run lint",
+  
+    "update-version": "lerna publish --skip-git --skip-npm --force-publish '*'"
   },
   "repository": {
     "type": "git",
