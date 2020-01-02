@@ -6,29 +6,45 @@ version: 2
 jobs:
     setup:
         docker:
-            - image: circleci/node:10.9.0
+            - image: circleci/node:10.18.0
         steps:
             - checkout
             - restore_cache:
                 keys:
                     - v1-dependencies-{{ checksum "package.json" }}
                     - v1-dependencies-
-            - run: yarn
+            - run:
+                - name: Install dependencies
+                - command: yarn
             - save_cache:
                 paths:
                     - node_modules
                 key: v1-dependencies-{{ checksum "package.json" }}
     build:
         docker:
-            - image: circleci/node:10.9.0
+            - image: circleci/node:10.18.0
         steps:
+            - restore_cache:
+                keys:
+                    - v1-dependencies-{{ checksum "package.json" }}
+                    - v1-dependencies-
+            - run:
+                - name: Install dependencies
+                - command: yarn
             - run:
                 - name: Build
                 - command: yarn build
     lint:
         docker:
-            - image: circleci/node:10.9.0
+            - image: circleci/node:10.18.0
         steps:
+            - restore_cache:
+                keys:
+                    - v1-dependencies-{{ checksum "package.json" }}
+                    - v1-dependencies-
+            - run:
+                - name: Install dependencies
+                - command: yarn
             - run:
                 - name: Lint
                 - command: yarn lint
