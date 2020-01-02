@@ -6,6 +6,7 @@
   "scripts": {
     "build": "tsc --project . && cp src/*.html dist/",
     "dev": "yarn build && yarn watch",
+    "lint": "eslint . --ext .ts,.tsx",
     "start": "electron ./dist/index.js",
     "watch": "tsc --project . --watch & yarn start"
   },
@@ -19,7 +20,8 @@
     "url": "https://github.com/kadhirvelm/looking-glass/issues"
   },
   "homepage": "https://github.com/kadhirvelm/looking-glass#readme",
-  "devDependencies": {
+  "devDependencies": {},
+  "dependencies": {
     "electron": "^7.1.7"
   }
 }

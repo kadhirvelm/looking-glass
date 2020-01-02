@@ -4,11 +4,7 @@ import "./index.scss";
 
 class LookingGlass extends React.PureComponent {
   public render() {
-    return (
-      <div className="main">
-        Hello World!
-      </div>
-    );
+    return <div className="main">Hello World!</div>;
   }
 }
 
