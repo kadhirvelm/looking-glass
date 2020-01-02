@@ -16,24 +16,40 @@ jobs:
 
     working_directory: ~/repo
 
-    steps:
-      - checkout
+    jobs:
+        setup:
+            docker:
+                - image: circleci/node:7.10
+            steps:
+                - checkout
+                - restore_cache:
+                    keys:
+                        - v1-dependencies-{{ checksum "package.json" }}
+                        - v1-dependencies-
+                - yarn
+                - save_cache:
+                    paths:
+                        - node_modules
+                    key: v1-dependencies-{{ checksum "package.json" }}
+        build:
+            docker:
+                - image: circleci/node:7.10
+            steps:
+                - yarn build
+        lint:
+            docker:
+                - image: circleci/node:7.10
+            steps:
+                - yarn lint
 
-      # Download and cache dependencies
-      - restore_cache:
-          keys:
-            - v1-dependencies-{{ checksum "package.json" }}
-            # fallback to using the latest cache if no exact match is found
-            - v1-dependencies-
-
-      - run: yarn
-
-      - save_cache:
-          paths:
-            - node_modules
-          key: v1-dependencies-{{ checksum "package.json" }}
-
-      # run tests!
-      - run: yarn build
-
-      - run: yarn lint
+    workflows:
+        version: 2
+        build:
+            jobs:
+                - setup
+                - build
+                    requires:
+                        - setup
+                - lint
+                    requires:
+                        - setup
