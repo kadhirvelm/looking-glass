@@ -9,7 +9,7 @@ function createWindow() {
         }
     });
 
-    basicWindow.loadFile("index.html");
+    basicWindow.loadURL("http://localhost:3000/interface/index.html");
 
     basicWindow.webContents.openDevTools()
 }
