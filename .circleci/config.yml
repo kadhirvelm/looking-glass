@@ -57,7 +57,7 @@ jobs:
             - checkout
             - run:
                 name: Clean yarn.lock
-                command: node ./packages/cleanLock.js
+                command: node ./scripts/cleanLock.js
 workflows:
     version: 2
     build_and_lint:
