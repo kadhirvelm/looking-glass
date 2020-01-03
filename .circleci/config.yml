@@ -48,16 +48,29 @@ jobs:
                 name: Install dependencies
                 command: yarn
             - run:
+                name: Build
+                command: yarn build
+            - run:
                 name: Lint
                 command: yarn lint
+    clean-lock:
+        docker:
+            - image: circleci/node:10.18.0
+        steps:
+            - checkout
+            - run:
+                name: Clean yarn.lock
+                command: node ./scripts/cleanLock.js
 workflows:
     version: 2
     build_and_lint:
         jobs:
             - setup
+            - clean-lock
             - build:
                 requires:
                     - setup
             - lint:
                 requires:
                     - setup
+                    - build

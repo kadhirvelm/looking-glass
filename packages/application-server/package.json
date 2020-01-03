@@ -1,15 +1,13 @@
 {
-  "name": "@looking-glass/electron",
+  "name": "@looking-glass/application-server",
   "version": "1.0.0",
-  "description": "The desktop application looking-glass is served in.",
+  "description": "Communication bridge between electron (main) and react (renderer).",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
   "scripts": {
-    "build": "tsc --project . -d && cp src/*.html dist/",
-    "dev": "yarn build && yarn watch",
-    "lint": "eslint . --ext .ts,.tsx",
-    "start": "electron ./dist/index.js",
-    "watch": "tsc --project . --watch & yarn start"
+    "build": "tsc --project . -d",
+    "dev": "yarn build --watch",
+    "lint": "eslint . --ext .ts"
   },
   "repository": {
     "type": "git",
@@ -22,7 +20,6 @@
   },
   "homepage": "https://github.com/kadhirvelm/looking-glass#readme",
   "dependencies": {
-    "@looking-glass/application-server": "^1.0.0",
     "electron": "^7.1.7"
   }
 }

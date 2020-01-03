@@ -23,4 +23,12 @@ module.exports = {
       "import/prefer-default-export": 0,
       "comma-dangle": 0,
     },
+
+    settings: {
+      "import/resolver": {
+        node: {
+          extensions: [".ts", ".tsx"],
+        }
+      }
+    }
 };
