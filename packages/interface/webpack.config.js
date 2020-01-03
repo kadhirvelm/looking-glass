@@ -10,6 +10,8 @@ module.exports = {
 
     mode: "production",
 
+    target: "electron-renderer",
+
     devServer: {
         contentBase: path.resolve(__dirname, "./src"),
         hot: true,
@@ -87,7 +89,6 @@ module.exports = {
 
     resolve: {
         extensions: [".js", ".ts", ".tsx", ".scss"],
-        symlinks: false,
     },
 
     externals: {

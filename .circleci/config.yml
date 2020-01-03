@@ -50,11 +50,20 @@ jobs:
             - run:
                 name: Lint
                 command: yarn lint
+    cleanLock:
+        docker:
+            - image: circleci/node:10.18.0
+        steps:
+            - checkout
+            - run:
+                name: Clean yarn.lock
+                command: node ./packages/cleanLock.js
 workflows:
     version: 2
     build_and_lint:
         jobs:
             - setup
+            - cleanLock
             - build:
                 requires:
                     - setup

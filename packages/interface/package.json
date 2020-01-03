@@ -2,7 +2,8 @@
   "name": "@looking-glass/interface",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
   "scripts": {
     "dev": "webpack-dev-server",
     "lint": "eslint . --ext .ts,.tsx",
@@ -19,6 +20,7 @@
   },
   "homepage": "https://github.com/kadhirvelm/looking-glass#readme",
   "dependencies": {
+    "@looking-glass/application-server": "^1.0.0",
     "react": "^16.12.0",
     "react-dom": "^16.12.0"
   },

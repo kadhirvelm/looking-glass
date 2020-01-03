@@ -1,10 +1,11 @@
 {
   "name": "@looking-glass/electron",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "The desktop application looking-glass is served in.",
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
   "scripts": {
-    "build": "tsc --project . && cp src/*.html dist/",
+    "build": "tsc --project . -d && cp src/*.html dist/",
     "dev": "yarn build && yarn watch",
     "lint": "eslint . --ext .ts,.tsx",
     "start": "electron ./dist/index.js",
@@ -20,8 +21,8 @@
     "url": "https://github.com/kadhirvelm/looking-glass/issues"
   },
   "homepage": "https://github.com/kadhirvelm/looking-glass#readme",
-  "devDependencies": {},
   "dependencies": {
+    "@looking-glass/application-server": "^1.0.0",
     "electron": "^7.1.7"
   }
 }

@@ -24,13 +24,9 @@
     "packages/*"
   ],
   "scripts": {
-    "interface": "cd packages/interface && yarn dev",
-    "electron": "cd packages/electron && yarn dev",
-    "dev": "yarn interface & yarn electron",
-  
+    "dev": "lerna run dev",
     "build": "lerna run build",
     "lint": "lerna run lint",
-  
     "update-version": "lerna publish --skip-git --skip-npm --force-publish '*'"
   },
   "repository": {

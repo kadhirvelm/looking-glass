@@ -1,18 +1,12 @@
 {
-  "name": "@looking-glass/server-side",
+  "name": "@looking-glass/application-server",
   "version": "1.0.0",
-  "description": "",
+  "description": "Communication bridge between electron (main) and react (renderer).",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
-  "dependencies": {},
-  "devDependencies": {
-    "@types/node": "^12.12.8",
-    "typescript": "^3.7.2"
-  },
   "scripts": {
     "build": "tsc --project . -d",
-    "dev": "yarn build --watch",
-    "lint": "eslint . --ext .ts,.tsx"
+    "dev": "yarn build --watch"
   },
   "repository": {
     "type": "git",
@@ -23,5 +17,8 @@
   "bugs": {
     "url": "https://github.com/kadhirvelm/looking-glass/issues"
   },
-  "homepage": "https://github.com/kadhirvelm/looking-glass#readme"
+  "homepage": "https://github.com/kadhirvelm/looking-glass#readme",
+  "dependencies": {
+    "electron": "^7.1.7"
+  }
 }
