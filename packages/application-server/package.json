@@ -6,7 +6,8 @@
   "typings": "dist/index.d.ts",
   "scripts": {
     "build": "tsc --project . -d",
-    "dev": "yarn build --watch"
+    "dev": "yarn build --watch",
+    "lint": "eslint . --ext .ts"
   },
   "repository": {
     "type": "git",

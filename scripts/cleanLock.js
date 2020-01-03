@@ -1,6 +1,6 @@
 const execSync = require("child_process").execSync;
 
-const output = execSync("npx yarn-deduplicate --list ../yarn.lock").toString();
+const output = execSync("npx yarn-deduplicate --list yarn.lock").toString();
 
 if (output === "") {
   process.exit(0);

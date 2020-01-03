@@ -1,14 +1,14 @@
-const webpack = require("webpack");
 const path = require("path");
 const miniCssExtractPlugin = require("mini-css-extract-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
     output : {
+        filename: "index.js",
         path : path.resolve(__dirname , "dist"),
     },
 
-    mode: "production",
+    mode: "development",
 
     target: "electron-renderer",
 
@@ -41,7 +41,7 @@ module.exports = {
         rules: [
             {
                 test: /\.s(a|c)ss$/,
-                include: path.resolve(__dirname, 'src'),
+                include: path.resolve(__dirname, "src"),
                 loader: [
                     miniCssExtractPlugin.loader,
                     "css-loader",
@@ -55,19 +55,15 @@ module.exports = {
             },
             {
                 test: /\.ts(x?)$/,
-                include: path.resolve(__dirname, 'src'),
+                include: path.resolve(__dirname, "src"),
                 exclude: /node_modules/,
                 use: [
-                    {
-                        loader: "cache-loader",
-                    },
                     {
                         loader: "react-hot-loader/webpack",
                     },
                     {
                         loader: "ts-loader",
                         options: {
-                            transpileOnly: true,
                             experimentalWatchApi: true,
                         }
                     }
@@ -82,8 +78,8 @@ module.exports = {
             template: "./src/index.html",
         }),
         new miniCssExtractPlugin({
-            filename: "[name].css",
-            chunkFilename: "[name].css"
+            filename: "index.css",
+            chunkFilename: "index.css"
         }),
     ],
 

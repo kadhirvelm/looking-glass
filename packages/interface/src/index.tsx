@@ -1,11 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.scss";
-import { IpcActions } from "@looking-glass/application-server";
+// import { IpcActions } from "@looking-glass/application-server";
 
 class LookingGlass extends React.PureComponent {
   public componentDidMount() {
-    IpcActions.sendSampleAction({});
+    // IpcActions.sendSampleAction({});
   }
 
   public render() {

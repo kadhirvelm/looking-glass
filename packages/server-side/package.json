@@ -12,7 +12,7 @@
   "scripts": {
     "build": "tsc --project . -d",
     "dev": "yarn build --watch",
-    "lint": "eslint . --ext .ts,.tsx"
+    "lint": "eslint . --ext .ts"
   },
   "repository": {
     "type": "git",

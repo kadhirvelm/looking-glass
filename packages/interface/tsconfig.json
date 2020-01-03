@@ -2,13 +2,12 @@
     "extends": "../../tsconfig.json",
     "compilerOptions": {
         "outDir": "./dist",
-        "declaration": true,
-        "declarationDir": "./dist",
         "sourceMap": true,
         "allowJs": true,
         "noImplicitAny": true,
+        "declaration": true,
         "jsx": "react"
     },
     "include": ["./src/*"],
-    "exclude": ["./webpack.config.js"]
+    "exclude": ["./dist/*", "./node_modules/*", "./webpack.config.js"]
 }

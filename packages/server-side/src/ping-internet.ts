@@ -29,9 +29,7 @@ async function writeDataset(counter: number, maxDataPoints: number) {
   }
 }
 
-function main() {
+export function main() {
   fileManager.writeEmptyFile();
   writeDataset(0, 10);
 }
-
-main();
