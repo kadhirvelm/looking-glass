@@ -5,7 +5,7 @@
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
   "scripts": {
-    "build": "tsc --project . -d && cp src/*.html dist/",
+    "build": "tsc --project . -d",
     "dev": "yarn build && yarn watch",
     "lint": "eslint . --ext .ts,.tsx",
     "start": "electron ./dist/index.js",
@@ -24,5 +24,8 @@
   "dependencies": {
     "@looking-glass/application-server": "^1.0.0",
     "electron": "^7.1.7"
+  },
+  "devDependencies": {
+    "@types/electron": "^1.6.10"
   }
 }

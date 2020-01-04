@@ -24,10 +24,12 @@
     "packages/*"
   ],
   "scripts": {
+    "clean": "node scripts/cleanPackages",
     "dev": "yarn dev:interface & yarn dev:electron",
     "dev:interface": "cd packages/interface && yarn dev",
     "dev:electron": "cd packages/electron && yarn dev",
     "build": "lerna run build",
+    "distribution": "node scripts/distribution",
     "lint": "lerna run lint",
     "update-version": "lerna publish --skip-git --skip-npm --force-publish '*'"
   },
