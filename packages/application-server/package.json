@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/kadhirvelm/looking-glass#readme",
   "dependencies": {
+    "@looking-glass/server-side": "^1.0.0",
     "electron": "^7.1.7"
   }
 }

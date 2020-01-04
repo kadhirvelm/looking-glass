@@ -9,7 +9,7 @@
     "dev": "yarn build && yarn watch",
     "lint": "eslint . --ext .ts,.tsx",
     "start": "electron ./dist/index.js",
-    "watch": "tsc --project . --watch & yarn start"
+    "watch": "tsc --project . -d --watch & yarn start"
   },
   "repository": {
     "type": "git",

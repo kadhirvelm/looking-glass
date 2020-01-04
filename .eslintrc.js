@@ -22,6 +22,10 @@ module.exports = {
       "@typescript-eslint/quotes": ["error", "double"],
       "import/prefer-default-export": 0,
       "comma-dangle": 0,
+      "react/state-in-constructor": 0,
+      "react/sort-comp": 0,
+      "implicit-arrow-linebreak": 0,
+      "arrow-parens": 0,
     },
 
     settings: {

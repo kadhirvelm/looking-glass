@@ -1,5 +1,6 @@
-import { listenSampleAction } from "./actions";
+import { listenSampleAction, listenPing } from "./actions";
 
 export function instantiateListeners() {
+  listenPing();
   listenSampleAction();
 }
