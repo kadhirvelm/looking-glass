@@ -1,7 +1,13 @@
 import { app, BrowserWindow } from "electron";
-import { instantiateListeners } from "@looking-glass/application-server";
+import { MAIN_LISTENERS } from "@looking-glass/application-server";
 import { format } from "url";
 import { join } from "path";
+
+function instantiateListeners() {
+  MAIN_LISTENERS.forEach(listener => {
+    listener();
+  });
+}
 
 function createWindow() {
   const basicWindow = new BrowserWindow({

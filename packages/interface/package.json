@@ -9,7 +9,9 @@
     "lint": "eslint . --ext .ts,.tsx",
     "build": "webpack"
   },
-  "sideEffects": ["*.css"],
+  "sideEffects": [
+    "*.css"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/kadhirvelm/looking-glass.git"
@@ -21,6 +23,7 @@
   },
   "homepage": "https://github.com/kadhirvelm/looking-glass#readme",
   "dependencies": {
+    "@blueprintjs/core": "^3.22.3",
     "@looking-glass/application-server": "^1.0.0",
     "react": "^16.12.0",
     "react-dom": "^16.12.0"
