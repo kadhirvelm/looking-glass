@@ -9,6 +9,7 @@
     "dev": "yarn build --watch",
     "lint": "eslint . --ext .ts"
   },
+  "sideEffects": false,
   "repository": {
     "type": "git",
     "url": "git+https://github.com/kadhirvelm/looking-glass.git"
@@ -20,6 +21,7 @@
   },
   "homepage": "https://github.com/kadhirvelm/looking-glass#readme",
   "dependencies": {
+    "@looking-glass/server-side": "^1.0.0",
     "electron": "^7.1.7"
   }
 }

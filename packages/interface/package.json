@@ -9,6 +9,7 @@
     "lint": "eslint . --ext .ts,.tsx",
     "build": "webpack"
   },
+  "sideEffects": ["*.css"],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/kadhirvelm/looking-glass.git"
@@ -27,6 +28,7 @@
   "devDependencies": {
     "@types/react": "^16.9.17",
     "@types/react-dom": "^16.9.4",
+    "@types/webpack-env": "^1.15.0",
     "css-loader": "^3.4.0",
     "html-webpack-plugin": "^3.2.0",
     "mini-css-extract-plugin": "^0.9.0",

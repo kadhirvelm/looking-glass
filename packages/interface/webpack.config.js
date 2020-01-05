@@ -8,7 +8,7 @@ module.exports = {
         path : path.resolve(__dirname , "dist"),
     },
 
-    mode: "development",
+    mode: "production",
 
     target: "electron-renderer",
 
@@ -27,11 +27,8 @@ module.exports = {
             assets: false,
             chunks: false,
             modules: false,
-            reasons: false,
             children: false,
             source: false,
-            errors: false,
-            errorDetails: false,
             warnings: false,
             publicPath: false
         }

@@ -5,12 +5,12 @@
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
   "scripts": {
-    "build": "tsc --project . -d && cp src/*.html dist/",
-    "dev": "yarn build && yarn watch",
+    "build": "webpack",
+    "dev": "webpack --watch & yarn start",
     "lint": "eslint . --ext .ts,.tsx",
-    "start": "electron ./dist/index.js",
-    "watch": "tsc --project . --watch & yarn start"
+    "start": "electron ./dist/index.js"
   },
+  "sideEffects": false,
   "repository": {
     "type": "git",
     "url": "git+https://github.com/kadhirvelm/looking-glass.git"
@@ -24,5 +24,8 @@
   "dependencies": {
     "@looking-glass/application-server": "^1.0.0",
     "electron": "^7.1.7"
+  },
+  "devDependencies": {
+    "@types/electron": "^1.6.10"
   }
 }

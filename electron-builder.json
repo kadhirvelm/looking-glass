@@ -1,0 +1,13 @@
+{
+  "appId": "com.looking-glass.app",
+  "productName": "Looking glass",
+  "files": ["./distribution/**/*", "package.json" ],
+  "directories": {
+    "app": "./",
+    "buildResources": "./distribution/electron",
+    "output": "production"
+  },
+  "extraMetadata": {
+    "main": "./distribution/electron/index.js"
+  }
+}

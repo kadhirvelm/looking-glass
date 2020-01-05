@@ -1,0 +1,6 @@
+scripts/*
+node_modules/*
+.circleci/*
+distribution/*
+production/*
+webpack.config.js
