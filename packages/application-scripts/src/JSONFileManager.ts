@@ -1,4 +1,12 @@
-import fs from "fs";
+import fs from "fs-extra";
+import { v4 } from "uuid";
+
+interface IFileMetadata {
+  id: string;
+  timestamp: Date;
+  name: string;
+  description: string;
+}
 
 export class JSONFileManager {
   private fullAddress: string;
@@ -7,8 +15,19 @@ export class JSONFileManager {
     this.fullAddress = `${address}/${name}`;
   }
 
-  public writeEmptyFile() {
-    return fs.writeFileSync(this.fullAddress, JSON.stringify({}));
+  public instantiateBasicFile(metadata?: IFileMetadata) {
+    const basicMetadata: IFileMetadata = {
+      id: v4(),
+      timestamp: new Date(),
+      name: "No name",
+      description: "No description",
+      ...metadata
+    };
+
+    return fs.outputFile(
+      this.fullAddress,
+      JSON.stringify({ metadata: basicMetadata }, null, 2)
+    );
   }
 
   public async addToFile(contents: any) {

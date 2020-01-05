@@ -1,35 +1,66 @@
+import { SingleBar, Presets } from "cli-progress";
 import { JSONFileManager } from "./JSONFileManager";
 import { InternetManager } from "./internetManager";
 
+const progressBar = new SingleBar({}, Presets.shades_classic);
+const TOTAL_PROGRESS_PER_DATAPOINT = 4;
+
+const internetManager = new InternetManager(progressBar);
+
 const fileManager = new JSONFileManager(
-  `internetData(${new Date().toDateString()}).json`,
-  "./dist/output"
+  `internetData (${new Date().toUTCString()}).json`,
+  "./output"
 );
 
 async function writeSingleDataPoint() {
   const response = await Promise.all([
-    InternetManager.pingInternet("127.0.0.1", 5),
-    InternetManager.pingInternet("www.google.com", 5),
-    InternetManager.pingSpeedtest()
+    internetManager.pingInternet("127.0.0.1", 5),
+    internetManager.pingInternet("www.google.com", 5),
+    internetManager.pingSpeedtest()
   ]);
-  fileManager.addToFile({
+  await fileManager.addToFile({
     localPing: response[0],
     internetPing: response[1],
     speedTest: response[2]
   });
+  progressBar.increment(1);
 }
 
-async function writeDataset(counter: number, maxDataPoints: number) {
-  await writeSingleDataPoint();
+function writeDataset(
+  counter: number,
+  maxDataPoints: number,
+  timeInSecondsBetweenCollections: number
+) {
+  return new Promise(async resolve => {
+    await writeSingleDataPoint();
 
-  if (maxDataPoints - counter !== 0) {
-    /* eslint-disable @typescript-eslint/no-misused-promises */
-    setTimeout(() => writeDataset(counter + 1, maxDataPoints), 5000);
-    /* eslint-enable @typescript-eslint/no-misused-promises */
-  }
+    if (maxDataPoints - counter === 0) {
+      resolve();
+      return;
+    }
+
+    setTimeout(async () => {
+      await writeDataset(
+        counter + 1,
+        maxDataPoints,
+        timeInSecondsBetweenCollections
+      );
+      resolve();
+    }, timeInSecondsBetweenCollections);
+  });
 }
 
-export function main() {
-  fileManager.writeEmptyFile();
-  writeDataset(0, 10);
+export async function pingNTimes(
+  totalPings: number,
+  timeInSecondsBetweenCollections: number
+) {
+  progressBar.start(totalPings * TOTAL_PROGRESS_PER_DATAPOINT + 1, 0);
+
+  await fileManager.instantiateBasicFile();
+  progressBar.increment(1);
+
+  await writeDataset(0, totalPings, timeInSecondsBetweenCollections);
+  progressBar.stop();
 }
+
+pingNTimes(5, 5000);

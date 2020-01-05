@@ -1,16 +1,25 @@
-import { execSync } from "child_process";
+import { promisify } from "util";
+import { exec } from "child_process";
+import speedtest from "speedtest-net";
+import { SingleBar } from "cli-progress";
+
+const execPromise = promisify(exec);
 
 export class InternetManager {
-  public static pingInternet(address: string, count: number) {
+  public constructor(private progressBar: SingleBar) {}
+
+  public async pingInternet(address: string, count: number) {
     try {
-      const response = execSync(`ping ${address} -c ${count}`, {
+      const response = await execPromise(`ping ${address} -c ${count}`, {
         encoding: "utf-8"
       });
 
-      const headline = response.match(/PING.*\n/g);
+      this.progressBar.increment(1);
+
+      const headline = response.stdout.match(/PING.*\n/g);
 
       const statistics = InternetManager.parseStatistics(
-        response.match(/---.*\n.*\n.*/g)?.toString()
+        response.stdout.match(/---.*\n.*\n.*/g)?.toString()
       );
 
       return {
@@ -25,11 +34,11 @@ export class InternetManager {
     }
   }
 
-  public static pingSpeedtest() {
+  public async pingSpeedtest() {
     try {
-      const response = execSync("speedtest-cli --simple", {
-        encoding: "utf-8"
-      });
+      const response = await InternetManager.executeSpeedTest();
+
+      this.progressBar.increment(1);
 
       return {
         response
@@ -40,6 +49,14 @@ export class InternetManager {
         stackTrace: error
       };
     }
+  }
+
+  static executeSpeedTest() {
+    return new Promise(resolve => {
+      const datapoint = speedtest({ maxTime: 5000, pingCount: 3 });
+
+      datapoint.on("data", (data: any) => resolve(data));
+    });
   }
 
   static parseStatistics(statistics: string | undefined) {

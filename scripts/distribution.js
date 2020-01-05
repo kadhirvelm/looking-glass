@@ -4,11 +4,6 @@ const execSync = require("child_process").execSync;
 
 const DISTRIBUTION_PATH = `distribution`;
 const TOTAL_STEPS = 4;
-const SPECIAL_PACKAGE_DIRECTORY_NAMES = ["electron", "interface"];
-
-function getPackageNames() {
-  return execSync("cd packages && ls").toString().split("\n").filter(packageName => packageName !== "" && !SPECIAL_PACKAGE_DIRECTORY_NAMES.includes(packageName));
-}
 
 function cleanAllPackages() {
   return new Promise(resolve => {
@@ -43,11 +38,6 @@ function copyFilesToDistribution() {
     console.log("\x1b[37m\tCopying desktop container over to distribution.\x1b[0m");
     const copyElectron = exec(`cp -a packages/electron/dist ${DISTRIBUTION_PATH}/electron`);
 
-    // const dependencyPackages = getPackageNames().map(packageName => {
-    //   console.log(`\x1b[37m\tCopying ${packageName} over to distribution.\x1b[0m`);
-    //   return exec(`cp -a packages/${packageName}/dist ${DISTRIBUTION_PATH}/${packageName}`);
-    // });
-
     Promise.all([copyInterface, copyElectron]).then(resolve);
   });
 }
@@ -66,7 +56,7 @@ async function main() {
     .then(copyFilesToDistribution)
     .then(buildProductionElectron)
     .then(() => {
-      console.log(`\n\x1b[32mSuccessfully created production build. See '${DISTRIBUTION_PATH}' for the distribution files and see 'production' for the application. \x1b[0m\n`);
+      console.log(`\n\x1b[32mSuccessfully created production build. See '${DISTRIBUTION_PATH}' for the distribution files and see 'production' for the final application. \x1b[0m\n`);
   });
 }
 

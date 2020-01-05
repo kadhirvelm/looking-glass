@@ -20,6 +20,7 @@ module.exports = {
     rules: {
       "prettier/prettier": "error",
       "@typescript-eslint/quotes": ["error", "double"],
+      "@typescript-eslint/no-misused-promises": 0,
       "import/prefer-default-export": 0,
       "comma-dangle": 0,
       "react/state-in-constructor": 0,
@@ -27,6 +28,7 @@ module.exports = {
       "implicit-arrow-linebreak": 0,
       "arrow-parens": 0,
       "class-methods-use-this": 0,
+      "no-async-promise-executor": 0,
     },
 
     settings: {

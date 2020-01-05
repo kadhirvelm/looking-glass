@@ -8,6 +8,7 @@ node_modules/*
 packages/*/node_modules/*
 packages/*/dist/*
 packages/*/build/*
+packages/*/output/*
 
 distribution/*
 production/*

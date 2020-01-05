@@ -1,3 +1,4 @@
+import { pingTenTimes } from "@looking-glass/application-scripts";
 import { BasicAction, RendererListener } from "./classes";
 import { IPing, IPingStatus } from "./typings";
 
@@ -17,6 +18,12 @@ const START_PING = new BasicAction<IPing>(CHANNELS.START_PING, event => {
     PING_STATUS.channel,
     PING_STATUS.verifyArgs({ isPinging: true })
   );
+  pingTenTimes().then(() => {
+    event.sender.send(
+      PING_STATUS.channel,
+      PING_STATUS.verifyArgs({ isPinging: false })
+    );
+  });
 });
 
 const STOP_PING = new BasicAction<IPing>(CHANNELS.STOP_PING, event => {
