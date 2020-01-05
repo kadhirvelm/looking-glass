@@ -1,5 +1,5 @@
 {
-  "name": "@looking-glass/server-side",
+  "name": "@looking-glass/application-scripts",
   "version": "1.0.0",
   "description": "",
   "main": "dist/index.js",

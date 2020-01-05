@@ -26,6 +26,7 @@ module.exports = {
       "react/sort-comp": 0,
       "implicit-arrow-linebreak": 0,
       "arrow-parens": 0,
+      "class-methods-use-this": 0,
     },
 
     settings: {

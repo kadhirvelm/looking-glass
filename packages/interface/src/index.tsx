@@ -1,7 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.scss";
-import { IpcActions, IPingStatus } from "@looking-glass/application-server";
+import {
+  RENDERER_ACTIONS,
+  RENDERER_LISTENERS,
+  IPingStatus
+} from "@looking-glass/application-server";
+import { Button } from "@blueprintjs/core";
 
 interface IState {
   pingingStatus: IPingStatus | undefined;
@@ -13,23 +18,19 @@ class LookingGlass extends React.PureComponent<{}, IState> {
   };
 
   public componentDidMount() {
-    IpcActions.listenForPingStatus(this.setPingStatus);
+    RENDERER_LISTENERS.pingStatus.listen(this.setPingStatus);
   }
 
   public componentWillUnmount() {
-    IpcActions.removeListenForPingStatus(this.setPingStatus);
+    RENDERER_LISTENERS.pingStatus.removeListener();
   }
 
   public render() {
     return (
       <div className="main">
         Current pinging state: {this.maybeRenderStatus()}
-        <button onClick={this.startPing} type="button">
-          Start ping
-        </button>
-        <button onClick={this.stopPing} type="button">
-          Stop ping
-        </button>
+        <Button onClick={this.startPing} text="Start ping" />
+        <Button onClick={this.stopPing} text="Stop ping" />
       </div>
     );
   }
@@ -43,9 +44,9 @@ class LookingGlass extends React.PureComponent<{}, IState> {
     return pingingStatus.isPinging ? "Pinging" : "Not started";
   }
 
-  private startPing = () => IpcActions.sendStartPing({});
+  private startPing = () => RENDERER_ACTIONS.startPing({});
 
-  private stopPing = () => IpcActions.sendStopPing({});
+  private stopPing = () => RENDERER_ACTIONS.stopPing({});
 
   private setPingStatus = (_: any, pingingStatus: IPingStatus) =>
     this.setState({ pingingStatus });

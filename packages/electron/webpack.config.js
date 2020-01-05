@@ -6,7 +6,7 @@ module.exports = {
         path : path.resolve(__dirname , "dist"),
     },
 
-    mode: "production",
+    mode: process.env.NODE_ENV,
 
     target: "electron-main",
 
