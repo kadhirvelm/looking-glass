@@ -10,6 +10,7 @@
     "lint": "eslint . --ext .ts,.tsx",
     "start": "electron ./dist/index.js"
   },
+  "sideEffects": false,
   "repository": {
     "type": "git",
     "url": "git+https://github.com/kadhirvelm/looking-glass.git"

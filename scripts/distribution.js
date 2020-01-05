@@ -43,12 +43,12 @@ function copyFilesToDistribution() {
     console.log("\x1b[37m\tCopying desktop container over to distribution.\x1b[0m");
     const copyElectron = exec(`cp -a packages/electron/dist ${DISTRIBUTION_PATH}/electron`);
 
-    const dependencyPackages = getPackageNames().map(packageName => {
-      console.log(`\x1b[37m\tCopying ${packageName} over to distribution.\x1b[0m`);
-      return exec(`cp -a packages/${packageName}/dist ${DISTRIBUTION_PATH}/${packageName}`);
-    });
+    // const dependencyPackages = getPackageNames().map(packageName => {
+    //   console.log(`\x1b[37m\tCopying ${packageName} over to distribution.\x1b[0m`);
+    //   return exec(`cp -a packages/${packageName}/dist ${DISTRIBUTION_PATH}/${packageName}`);
+    // });
 
-    Promise.all([copyInterface, copyElectron, ...dependencyPackages]).then(resolve);
+    Promise.all([copyInterface, copyElectron]).then(resolve);
   });
 }
 

@@ -9,6 +9,7 @@
     "@types/node": "^12.12.8",
     "typescript": "^3.7.2"
   },
+  "sideEffects": false,
   "scripts": {
     "build": "tsc --project . -d",
     "dev": "yarn build --watch",

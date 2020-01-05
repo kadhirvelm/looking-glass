@@ -5,7 +5,6 @@
         "sourceMap": true,
         "allowJs": true,
         "noImplicitAny": true,
-        "declaration": true,
         "jsx": "react",
         "types": ["webpack-env"]
     },

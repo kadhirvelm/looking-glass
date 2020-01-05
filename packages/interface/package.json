@@ -9,6 +9,7 @@
     "lint": "eslint . --ext .ts,.tsx",
     "build": "webpack"
   },
+  "sideEffects": ["*.css"],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/kadhirvelm/looking-glass.git"
