@@ -5,11 +5,10 @@
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
   "scripts": {
-    "build": "tsc --project . -d",
-    "dev": "yarn build && yarn watch",
+    "build": "webpack",
+    "dev": "webpack --watch & yarn start",
     "lint": "eslint . --ext .ts,.tsx",
-    "start": "electron ./dist/index.js",
-    "watch": "tsc --project . -d --watch & yarn start"
+    "start": "electron ./dist/index.js"
   },
   "repository": {
     "type": "git",

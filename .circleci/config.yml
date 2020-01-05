@@ -61,6 +61,18 @@ jobs:
             - run:
                 name: Clean yarn.lock
                 command: node ./scripts/cleanLock.js
+    dry-distribution:
+        docker:
+            - image: circleci/node:10.18.0
+        steps:
+            - checkout
+            - restore_cache:
+                keys:
+                    - v1-dependencies-{{ checksum "package.json" }}
+                    - v1-dependencies-
+            - run:
+                name: Testing distribution
+                command: yarn distribution
 workflows:
     version: 2
     build_and_lint:
@@ -73,4 +85,8 @@ workflows:
             - lint:
                 requires:
                     - setup
+                    - build
+            - dry-distribution:
+                requires:
+                    - lint
                     - build
