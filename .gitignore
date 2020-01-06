@@ -9,6 +9,7 @@ packages/*/node_modules/*
 packages/*/dist/*
 packages/*/build/*
 packages/*/output/*
+packages/*/.looking-glass/*
 
 distribution/*
 production/*

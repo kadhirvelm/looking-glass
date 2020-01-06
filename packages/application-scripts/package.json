@@ -5,7 +5,6 @@
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
   "dependencies": {
-    "cli-progress": "^3.4.0",
     "fs-extra": "^8.1.0",
     "speedtest-net": "^1.6.0",
     "uuid": "^3.3.3"

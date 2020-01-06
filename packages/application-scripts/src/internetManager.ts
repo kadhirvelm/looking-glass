@@ -1,12 +1,11 @@
 import { promisify } from "util";
 import { exec } from "child_process";
 import speedtest from "speedtest-net";
-import { SingleBar } from "cli-progress";
 
 const execPromise = promisify(exec);
 
 export class InternetManager {
-  public constructor(private progressBar: SingleBar) {}
+  public constructor(private onProgress: () => void) {}
 
   public async pingInternet(address: string, count: number) {
     try {
@@ -14,7 +13,7 @@ export class InternetManager {
         encoding: "utf-8"
       });
 
-      this.progressBar.increment(1);
+      this.onProgress();
 
       const headline = response.stdout.match(/PING.*\n/g);
 
@@ -38,7 +37,7 @@ export class InternetManager {
     try {
       const response = await InternetManager.executeSpeedTest();
 
-      this.progressBar.increment(1);
+      this.onProgress();
 
       return {
         response

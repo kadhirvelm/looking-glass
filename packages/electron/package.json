@@ -6,7 +6,7 @@
   "typings": "dist/index.d.ts",
   "scripts": {
     "build": "webpack",
-    "dev": "webpack --watch & yarn start",
+    "dev": "webpack --watch",
     "lint": "eslint . --ext .ts,.tsx",
     "start": "electron ./dist/index.js"
   },
