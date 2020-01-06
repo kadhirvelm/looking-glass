@@ -27,8 +27,7 @@
   "scripts": {
     "clean": "node scripts/cleanPackages",
     "dev": "lerna run dev --parallel",
-    "dev:interface": "cd packages/interface && yarn dev",
-    "dev:electron": "cd packages/electron && yarn dev",
+    "open-app": "cd packages/electron && yarn start",
     "build": "lerna run build",
     "distribution": "node scripts/distribution",
     "lint": "lerna run lint",

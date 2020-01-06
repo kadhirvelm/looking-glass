@@ -1,6 +1,7 @@
 import { SingleBar, Presets } from "cli-progress";
 import { JSONFileManager } from "./JSONFileManager";
 import { InternetManager } from "./internetManager";
+import { CONSTANTS } from "./constants";
 
 const progressBar = new SingleBar({}, Presets.shades_classic);
 const TOTAL_PROGRESS_PER_DATAPOINT = 4;
@@ -8,8 +9,8 @@ const TOTAL_PROGRESS_PER_DATAPOINT = 4;
 const internetManager = new InternetManager(progressBar);
 
 const fileManager = new JSONFileManager(
-  `internetData (${new Date().toUTCString()}).json`,
-  "./output"
+  `(${new Date().toUTCString()}).json`,
+  CONSTANTS.OUTPUT_DIRECTORY
 );
 
 async function writeSingleDataPoint() {
@@ -62,5 +63,3 @@ export async function pingNTimes(
   await writeDataset(0, totalPings, timeInSecondsBetweenCollections);
   progressBar.stop();
 }
-
-pingNTimes(5, 5000);

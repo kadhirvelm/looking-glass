@@ -11,8 +11,8 @@ interface IFileMetadata {
 export class JSONFileManager {
   private fullAddress: string;
 
-  constructor(name: string, address: string) {
-    this.fullAddress = `${address}/${name}`;
+  constructor(name: string, private address: string) {
+    this.fullAddress = `${this.address}/${name}`;
   }
 
   public instantiateBasicFile(metadata?: IFileMetadata) {
@@ -44,5 +44,15 @@ export class JSONFileManager {
   public readFile() {
     const rawContent = fs.readFileSync(this.fullAddress);
     return JSON.parse(rawContent.toString());
+  }
+
+  public readDirectory() {
+    // try {
+    //   console.log("WTF, THIS IS NOT REACHING.");
+    //   return fs.readdirSync(this.address);
+    // } catch {
+    //   return [];
+    // }
+    return [];
   }
 }

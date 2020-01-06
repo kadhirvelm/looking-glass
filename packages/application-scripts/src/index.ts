@@ -1,1 +1,2 @@
-export * from "./ping-internet";
+export { pingNTimes } from "./ping-internet";
+export { getDatasets, getSingleDataset } from "./getDatasets";
