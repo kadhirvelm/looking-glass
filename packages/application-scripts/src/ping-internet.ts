@@ -1,19 +1,18 @@
-import { SingleBar, Presets } from "cli-progress";
 import { JSONFileManager } from "./JSONFileManager";
 import { InternetManager } from "./internetManager";
 import { CONSTANTS } from "./constants";
 
-const progressBar = new SingleBar({}, Presets.shades_classic);
 const TOTAL_PROGRESS_PER_DATAPOINT = 4;
-
-const internetManager = new InternetManager(progressBar);
 
 const fileManager = new JSONFileManager(
   `(${new Date().toUTCString()}).json`,
   CONSTANTS.OUTPUT_DIRECTORY
 );
 
-async function writeSingleDataPoint() {
+async function writeSingleDataPoint(
+  internetManager: InternetManager,
+  onLocalProgress: () => void
+) {
   const response = await Promise.all([
     internetManager.pingInternet("127.0.0.1", 5),
     internetManager.pingInternet("www.google.com", 5),
@@ -24,42 +23,64 @@ async function writeSingleDataPoint() {
     internetPing: response[1],
     speedTest: response[2]
   });
-  progressBar.increment(1);
+  onLocalProgress();
 }
 
 function writeDataset(
   counter: number,
   maxDataPoints: number,
-  timeInSecondsBetweenCollections: number
+  timeInSecondsBetweenCollections: number,
+  internetManager: InternetManager,
+  onLocalProgress: () => void
 ) {
   return new Promise(async resolve => {
-    await writeSingleDataPoint();
-
     if (maxDataPoints - counter === 0) {
       resolve();
       return;
     }
 
+    await writeSingleDataPoint(internetManager, onLocalProgress);
+
     setTimeout(async () => {
       await writeDataset(
         counter + 1,
         maxDataPoints,
-        timeInSecondsBetweenCollections
+        timeInSecondsBetweenCollections,
+        internetManager,
+        onLocalProgress
       );
       resolve();
-    }, timeInSecondsBetweenCollections);
+    }, timeInSecondsBetweenCollections * 1000);
   });
 }
 
 export async function pingNTimes(
   totalPings: number,
-  timeInSecondsBetweenCollections: number
+  timeInSecondsBetweenCollections: number,
+  onProgress: (percent: number, totalDatapointsCollected: number) => void
 ) {
-  progressBar.start(totalPings * TOTAL_PROGRESS_PER_DATAPOINT + 1, 0);
+  const totalPoints = totalPings * TOTAL_PROGRESS_PER_DATAPOINT + 2;
+  let currentPoints = 0;
+
+  const onLocalProgress = () => {
+    currentPoints += 1;
+    onProgress(
+      currentPoints / totalPoints,
+      Math.floor((currentPoints - 1) / TOTAL_PROGRESS_PER_DATAPOINT)
+    );
+  };
+
+  const internetManager = new InternetManager(onLocalProgress);
 
   await fileManager.instantiateBasicFile();
-  progressBar.increment(1);
+  onLocalProgress();
 
-  await writeDataset(0, totalPings, timeInSecondsBetweenCollections);
-  progressBar.stop();
+  await writeDataset(
+    0,
+    totalPings,
+    timeInSecondsBetweenCollections,
+    internetManager,
+    onLocalProgress
+  );
+  onLocalProgress();
 }

@@ -3,12 +3,14 @@ import { Spinner, NonIdealState } from "@blueprintjs/core";
 import {
   IDatasets,
   RENDERER_LISTENERS,
-  RENDERER_ACTIONS
+  RENDERER_ACTIONS,
+  ISingleDataset
 } from "@looking-glass/application-server";
 import "./datasets.scss";
 
 interface IState {
   datasets: string[] | undefined;
+  singleDataset?: ISingleDataset;
 }
 
 export class Datasets extends React.PureComponent<{}, IState> {
@@ -18,7 +20,13 @@ export class Datasets extends React.PureComponent<{}, IState> {
 
   public componentDidMount() {
     RENDERER_LISTENERS.getDatasets.listen(this.setDatasets);
+    RENDERER_LISTENERS.getSingleDataset.listen(this.setSingleDataset);
     RENDERER_ACTIONS.requestDatasets({});
+  }
+
+  public componentWillUnmount() {
+    RENDERER_LISTENERS.getDatasets.removeListener();
+    RENDERER_LISTENERS.getSingleDataset.removeListener();
   }
 
   public render() {
@@ -39,11 +47,13 @@ export class Datasets extends React.PureComponent<{}, IState> {
 
     return (
       <div className="datasets-container">
+        <span>{datasets.length} datasets</span>
         {datasets.map(dataset => (
           <div key={dataset} onClick={this.requestSingleDataset(dataset)}>
             {dataset}
           </div>
         ))}
+        {this.maybeRenderSingleDatasetInfo()}
       </div>
     );
   }
@@ -54,6 +64,18 @@ export class Datasets extends React.PureComponent<{}, IState> {
     };
   }
 
+  private maybeRenderSingleDatasetInfo() {
+    const { singleDataset } = this.state;
+    if (singleDataset === undefined) {
+      return null;
+    }
+
+    return <div>{JSON.stringify(singleDataset)}</div>;
+  }
+
   private setDatasets = (_: any, datasets: IDatasets) =>
     this.setState({ datasets: datasets.datasetNames });
+
+  private setSingleDataset = (_: any, singleDataset: ISingleDataset) =>
+    this.setState({ singleDataset });
 }
