@@ -1,18 +1,15 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.scss";
-import { Datasets } from "./components/datasets";
-import { PingInternet } from "./components/pingInternet";
+import { Provider } from "react-redux";
+import { LookingGlass } from "./LookingGlass";
+import { configureStore } from "./store/configureStore";
 
-class LookingGlass extends React.PureComponent {
-  public render() {
-    return (
-      <div className="main">
-        <PingInternet />
-        <Datasets />
-      </div>
-    );
-  }
-}
+const store = configureStore();
 
-ReactDOM.render(<LookingGlass />, document.getElementById("main-app"));
+ReactDOM.render(
+  <Provider store={store}>
+    <LookingGlass />
+  </Provider>,
+  document.getElementById("main-app")
+);
