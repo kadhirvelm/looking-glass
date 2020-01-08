@@ -1,41 +1,32 @@
-import * as React from "react";
-import { Spinner, NonIdealState } from "@blueprintjs/core";
+import { NonIdealState, Spinner } from "@blueprintjs/core";
 import {
-  IDatasets,
-  RENDERER_LISTENERS,
-  RENDERER_ACTIONS,
-  ISingleDataset
+  ISingleDataset,
+  RENDERER_ACTIONS
 } from "@looking-glass/application-server";
+import * as React from "react";
+import { connect } from "react-redux";
+import { IStoreState } from "../store/state";
 import "./datasets.scss";
 
-interface IState {
-  datasets: string[] | undefined;
-  singleDataset?: ISingleDataset;
+interface IStateProps {
+  datasetNames?: string[];
+  singleDatasetInfo?: ISingleDataset;
 }
 
-export class Datasets extends React.PureComponent<{}, IState> {
-  public state: IState = {
-    datasets: undefined
-  };
+type IProps = IStateProps;
 
+class UnconnectedDatasets extends React.PureComponent<IProps> {
   public componentDidMount() {
-    RENDERER_LISTENERS.getDatasets.listen(this.setDatasets);
-    RENDERER_LISTENERS.getSingleDataset.listen(this.setSingleDataset);
     RENDERER_ACTIONS.requestDatasets({});
   }
 
-  public componentWillUnmount() {
-    RENDERER_LISTENERS.getDatasets.removeListener();
-    RENDERER_LISTENERS.getSingleDataset.removeListener();
-  }
-
   public render() {
-    const { datasets } = this.state;
-    if (datasets === undefined) {
+    const { datasetNames } = this.props;
+    if (datasetNames === undefined) {
       return <Spinner />;
     }
 
-    if (datasets.length === 0) {
+    if (datasetNames.length === 0) {
       return (
         <NonIdealState
           description="Please gather some datasets before you can analyze them."
@@ -47,8 +38,8 @@ export class Datasets extends React.PureComponent<{}, IState> {
 
     return (
       <div className="datasets-container">
-        <span>{datasets.length} datasets</span>
-        {datasets.map(dataset => (
+        <span>{datasetNames.length} datasets</span>
+        {datasetNames.map(dataset => (
           <div key={dataset} onClick={this.requestSingleDataset(dataset)}>
             {dataset}
           </div>
@@ -65,17 +56,20 @@ export class Datasets extends React.PureComponent<{}, IState> {
   }
 
   private maybeRenderSingleDatasetInfo() {
-    const { singleDataset } = this.state;
-    if (singleDataset === undefined) {
+    const { singleDatasetInfo } = this.props;
+    if (singleDatasetInfo === undefined) {
       return null;
     }
 
-    return <div>{JSON.stringify(singleDataset)}</div>;
+    return <div>{JSON.stringify(singleDatasetInfo)}</div>;
   }
-
-  private setDatasets = (_: any, datasets: IDatasets) =>
-    this.setState({ datasets: datasets.datasetNames });
-
-  private setSingleDataset = (_: any, singleDataset: ISingleDataset) =>
-    this.setState({ singleDataset });
 }
+
+function mapStateToProps(state: IStoreState): IStateProps {
+  return {
+    datasetNames: state.application.datasets?.datasetNames,
+    singleDatasetInfo: state.application.singleDatasetInfo
+  };
+}
+
+export const Datasets = connect(mapStateToProps)(UnconnectedDatasets);
