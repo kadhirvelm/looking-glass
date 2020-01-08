@@ -6,19 +6,26 @@ import {
   IPingPercentComplete
 } from "@looking-glass/application-server";
 import { Button, ProgressBar } from "@blueprintjs/core";
+import { connect } from "react-redux";
+import { IStoreState } from "../store/state";
 
-interface IState {
+interface IStateProps {
   pingStatus?: IPingStatus;
   pingPercentComplete?: IPingPercentComplete;
 }
 
-export class PingInternet extends React.PureComponent<{}, IState> {
-  public state: IState = {};
+type IProps = IStateProps;
 
+class UnconnectedPingInternet extends React.PureComponent<IProps> {
   public componentDidMount() {
-    RENDERER_LISTENERS.pingStatus.listen(this.setPingStatus);
-    RENDERER_LISTENERS.pingPercentComplete.listen(this.setPingPercentComplete);
     RENDERER_ACTIONS.getPingStatus({});
+  }
+
+  public componentDidUpdate(newProps: IProps) {
+    const { pingStatus } = this.props;
+    if (pingStatus?.isPinging && !newProps.pingStatus?.isPinging) {
+      RENDERER_ACTIONS.requestDatasets({});
+    }
   }
 
   public componentWillUnmount() {
@@ -26,7 +33,7 @@ export class PingInternet extends React.PureComponent<{}, IState> {
   }
 
   public render() {
-    const { pingStatus, pingPercentComplete } = this.state;
+    const { pingStatus, pingPercentComplete } = this.props;
     if (pingStatus !== undefined && pingStatus.isPinging) {
       return (
         <div className="ping-percent-container">
@@ -48,7 +55,7 @@ export class PingInternet extends React.PureComponent<{}, IState> {
   }
 
   private maybeRenderPingPercent() {
-    const { pingPercentComplete } = this.state;
+    const { pingPercentComplete } = this.props;
     if (pingPercentComplete === undefined) {
       return null;
     }
@@ -58,18 +65,13 @@ export class PingInternet extends React.PureComponent<{}, IState> {
 
   private startPinging = () =>
     RENDERER_ACTIONS.startPing({ totalTimes: 2, timeBetweenPings: 5 });
-
-  private setPingStatus = (_: any, newPingStatus: IPingStatus) => {
-    const { pingStatus } = this.state;
-    if (pingStatus?.isPinging && !newPingStatus.isPinging) {
-      RENDERER_ACTIONS.requestDatasets({});
-    }
-
-    this.setState({ pingStatus: newPingStatus });
-  };
-
-  private setPingPercentComplete = (
-    _: any,
-    pingPercentComplete: IPingPercentComplete
-  ) => this.setState({ pingPercentComplete });
 }
+
+function mapStateToProps(state: IStoreState): IStateProps {
+  return {
+    pingPercentComplete: state.application.pingPercentComplete,
+    pingStatus: state.application.pingStatus
+  };
+}
+
+export const PingInternet = connect(mapStateToProps)(UnconnectedPingInternet);

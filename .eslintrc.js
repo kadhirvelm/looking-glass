@@ -31,6 +31,7 @@ module.exports = {
       "no-async-promise-executor": 0,
       "jsx-a11y/click-events-have-key-events": 0,
       "jsx-a11y/no-static-element-interactions": 0,
+      "function-paren-newline": 0,
     },
 
     settings: {

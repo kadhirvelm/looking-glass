@@ -8,6 +8,6 @@
         "jsx": "react",
         "types": ["webpack-env"]
     },
-    "include": ["./src/*"],
+    "include": ["./src/**/*"],
     "exclude": ["./dist/*", "./node_modules/*", "./webpack.config.js"]
 }

@@ -9,7 +9,7 @@ const store = configureStore();
 
 ReactDOM.render(
   <Provider store={store}>
-    <LookingGlass />
+    <LookingGlass dispatch={store.dispatch} />
   </Provider>,
   document.getElementById("main-app")
 );
