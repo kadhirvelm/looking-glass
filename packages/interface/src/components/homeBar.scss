@@ -1,0 +1,9 @@
+@import "../utils/colors";
+
+.home-bar {
+  display: flex;
+  flex-direction: column;
+  width: 75px;
+  background: $navy;
+  padding: 10px;
+}
