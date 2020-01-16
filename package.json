@@ -24,6 +24,9 @@
   "workspaces": [
     "packages/*"
   ],
+  "resolutions": {
+    "redux": "4.0.1"
+  },
   "scripts": {
     "build": "lerna run build",
     "clean": "node scripts/cleanPackages",
