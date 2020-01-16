@@ -3,8 +3,17 @@
 .home-bar {
   display: flex;
   flex-direction: column;
-  width: 75px;
+  width: 80px;
   background: $black;
-  padding: 10px;
   padding-top: 35px;
+}
+
+.route-option {
+  padding: 10px 5px;
+  cursor: pointer;
+  transition: background 200ms ease-out;
+}
+
+.selected {
+  background: lighten($black, 15%);
 }

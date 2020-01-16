@@ -1,5 +1,6 @@
 import * as React from "react";
 import { Dispatch } from "redux";
+import { connect } from "react-redux";
 import { PingInternet } from "./components/pingInternet";
 import { Datasets } from "./components/datasets";
 import {
@@ -9,23 +10,27 @@ import {
 import "./LookingGlass.scss";
 import { IUrlOptions, IRouteOption } from "./utils/typings";
 import { HomeBar } from "./components/homeBar";
+import { IStoreState } from "./store/state";
 
-interface IProps {
-  dispatch: Dispatch;
+interface IOwnProps {
+  /**
+   * This is passed in so we can instanitate the renderer listeners once
+   * after the main component mounts. We do not want actions dispatching
+   * before the first full render cycle has completed.
+   */
+  dispatchProp: Dispatch;
 }
 
-interface IState {
+interface IStoreProps {
   route: IRouteOption;
 }
 
-export class LookingGlass extends React.PureComponent<IProps, IState> {
-  public state: IState = {
-    route: { url: IUrlOptions.HOME }
-  };
+type IProps = IOwnProps & IStoreProps;
 
+export class UnconnectedLookingGlass extends React.PureComponent<IProps> {
   public componentDidMount() {
-    const { dispatch } = this.props;
-    instantiateRendererListeners(dispatch);
+    const { dispatchProp } = this.props;
+    instantiateRendererListeners(dispatchProp);
   }
 
   public componentWillUnmount() {
@@ -35,7 +40,7 @@ export class LookingGlass extends React.PureComponent<IProps, IState> {
   public render() {
     return (
       <div className="main">
-        <HomeBar onChange={this.handlePageChange} />
+        <HomeBar />
         {this.renderPage()}
       </div>
     );
@@ -44,7 +49,7 @@ export class LookingGlass extends React.PureComponent<IProps, IState> {
   private renderPage() {
     const {
       route: { url }
-    } = this.state;
+    } = this.props;
 
     switch (url) {
       case IUrlOptions.HOME:
@@ -74,6 +79,12 @@ export class LookingGlass extends React.PureComponent<IProps, IState> {
   private renderAnalyzeData() {
     return <div className="main">To be implemented.</div>;
   }
-
-  private handlePageChange = (route: IRouteOption) => this.setState({ route });
 }
+
+function mapStateToProps(state: IStoreState): IStoreProps {
+  return {
+    route: state.interface.route
+  };
+}
+
+export const LookingGlass = connect(mapStateToProps)(UnconnectedLookingGlass);
