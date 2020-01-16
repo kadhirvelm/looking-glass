@@ -25,12 +25,12 @@
     "packages/*"
   ],
   "scripts": {
+    "build": "lerna run build",
     "clean": "node scripts/cleanPackages",
     "dev": "lerna run dev --parallel",
-    "open-app": "cd packages/electron && yarn start",
-    "build": "lerna run build",
     "distribution": "node scripts/distribution",
     "lint": "lerna run lint --parallel",
+    "start": "cd packages/electron && yarn start",
     "update-version": "lerna publish --skip-git --skip-npm --force-publish '*'"
   },
   "repository": {
