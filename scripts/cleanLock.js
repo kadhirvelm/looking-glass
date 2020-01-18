@@ -1,7 +1,7 @@
 const execSync = require("child_process").execSync;
 
 function testBasicCleanLock() {
-  execSync("NODE_ENV=development yarn", { stdio: "ignore" });
+  execSync("yarn", { stdio: "ignore" });
   const deduplicateDiff = execSync("npx yarn-deduplicate --list yarn.lock").toString();
 
   if (deduplicateDiff === "") {
@@ -21,7 +21,6 @@ function testBasicCleanLock() {
 function main() {
   try {
     testBasicCleanLock();
-    execSync("NODE_ENV=production");
     process.exit(0);
   } catch {
     process.exit(1);
