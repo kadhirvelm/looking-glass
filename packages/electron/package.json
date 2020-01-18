@@ -25,7 +25,5 @@
     "@looking-glass/application-server": "^1.0.0",
     "electron": "^7.1.7"
   },
-  "devDependencies": {
-    "@types/electron": "^1.6.10"
-  }
+  "devDependencies": {}
 }

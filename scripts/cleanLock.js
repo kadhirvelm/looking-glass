@@ -1,33 +1,27 @@
 const execSync = require("child_process").execSync;
 
 function testBasicCleanLock() {
-  const output = execSync("npx yarn-deduplicate --list yarn.lock").toString();
+  execSync("NODE_ENV=development yarn", { stdio: "ignore" });
+  const deduplicateDiff = execSync("npx yarn-deduplicate --list yarn.lock").toString();
 
-  if (output === "") {
+  if (deduplicateDiff === "") {
     return;
   }
-
   console.log("The lockfile is not clean, please run 'yarn clean:lock' in the root directory.");
-  throw new Error("The lockfile is not clean.");
-}
 
-function runYarnAndTestForChanges() {
-  execSync("yarn", { stdio: "ignore" });
-  const output = execSync("git diff yarn.lock").toString();
-  if (output === "") {
+  const yarnDiff = execSync("git diff yarn.lock").toString();
+  if (yarnDiff === "") {
     return;
   }
-
-  console.log(output);
 
   console.log("The lockfile has changed, please run 'yarn' in the root folder and commit the changes.");
-  throw new Error("The lockfile needs changes.");
+  throw new Error("The lockfile is not clean.");
 }
 
 function main() {
   try {
-    runYarnAndTestForChanges();
     testBasicCleanLock();
+    execSync("NODE_ENV=production");
     process.exit(0);
   } catch {
     process.exit(1);
