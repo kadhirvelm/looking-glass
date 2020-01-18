@@ -1,3 +1,4 @@
+import classNames from "classnames";
 import * as React from "react";
 import { Dispatch, bindActionCreators } from "redux";
 import { connect } from "react-redux";
@@ -5,7 +6,6 @@ import { IRouteOption, IUrlOptions } from "../utils/typings";
 import "./homeBar.scss";
 import { IStoreState } from "../store/state";
 import { SET_ROUTE } from "../store";
-import classNames from "classnames";
 
 interface IStoreProps {
   url: IUrlOptions;
