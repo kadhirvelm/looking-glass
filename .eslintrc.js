@@ -15,6 +15,9 @@ module.exports = {
       "plugin:@typescript-eslint/recommended-requiring-type-checking",
       "prettier/@typescript-eslint",
       "prettier/react",
+      "plugin:import/errors",
+      "plugin:import/warnings",
+      "plugin:import/typescript",
     ],
 
     rules: {
@@ -37,7 +40,7 @@ module.exports = {
     settings: {
       "import/resolver": {
         node: {
-          extensions: [".js", ".ts", ".tsx"],
+          extensions: [".js", ".jsx", ".ts", ".tsx"],
         }
       }
     }

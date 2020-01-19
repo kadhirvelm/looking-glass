@@ -3,13 +3,13 @@ import {
   ISingleDataset,
   RENDERER_ACTIONS
 } from "@looking-glass/application-server";
+import classNames from "classnames";
 import * as React from "react";
 import { connect } from "react-redux";
+import ReactJson from "react-json-view";
 import { IStoreState } from "../../store/state";
 import "./datasets.scss";
 import { Flexbox } from "../../common/flexbox";
-import classNames from "classnames";
-import ReactJson from "react-json-view";
 
 interface IStateProps {
   datasetNames?: string[];
