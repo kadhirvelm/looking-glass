@@ -7,7 +7,8 @@ import {
 } from "@looking-glass/application-server";
 import { Button, ProgressBar } from "@blueprintjs/core";
 import { connect } from "react-redux";
-import { IStoreState } from "../store/state";
+import { IStoreState } from "../../store/state";
+import { Flexbox } from "../../common/flexbox";
 
 interface IStateProps {
   pingStatus?: IPingStatus;
@@ -36,21 +37,25 @@ class UnconnectedPingInternet extends React.PureComponent<IProps> {
     const { pingStatus, pingPercentComplete } = this.props;
     if (pingStatus !== undefined && pingStatus.isPinging) {
       return (
-        <div className="ping-percent-container">
+        <Flexbox flexDirection="column" justifyContent="flex-end">
           <span>
             Is pinging! {JSON.stringify(pingStatus.pingRequest)} (
             {pingPercentComplete?.totalDatapointsCollected}/
             {pingStatus.pingRequest?.totalTimes})
           </span>
           {this.maybeRenderPingPercent()}
-        </div>
+        </Flexbox>
       );
     }
 
     return (
-      <div>
-        <Button text="Collect data" onClick={this.startPinging} />
-      </div>
+      <Flexbox justifyContent="flex-end">
+        <Button
+          intent="primary"
+          onClick={this.startPinging}
+          text="Collect data"
+        />
+      </Flexbox>
     );
   }
 

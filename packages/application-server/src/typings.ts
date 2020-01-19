@@ -21,4 +21,7 @@ export interface ISingleDatasetRequest {
   name: string;
 }
 
-export type ISingleDataset = any;
+export type ISingleDataset = {
+  datasetName: string;
+  data: any;
+};

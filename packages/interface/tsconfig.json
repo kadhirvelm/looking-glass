@@ -6,7 +6,8 @@
         "allowJs": true,
         "noImplicitAny": true,
         "jsx": "react",
-        "types": ["webpack-env"]
+        "types": ["webpack-env"],
+        "moduleResolution": "node"
     },
     "include": ["./src/**/*"],
     "exclude": ["./dist/*", "./node_modules/*", "./webpack.config.js"]

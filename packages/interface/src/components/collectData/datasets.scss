@@ -1,0 +1,36 @@
+@import "../../utils/colors";
+
+.datasets-container {
+  padding: 10px 0;
+}
+
+.dataset-header-text {
+  margin-left: 10px;
+  font-weight: 600;
+  padding-top: 10px;
+}
+
+.datasets-table {
+  margin-top: 10px;
+  box-shadow: 0 1px $muted-text-color, 0 -1px $muted-text-color;
+}
+
+.single-dataset {
+  padding: 5px 10px;
+  box-shadow: 0 1px $muted-text-color;
+  cursor: pointer;
+
+  &:hover {
+    background: rgba($text-color, 0.1);
+  }
+}
+
+.selected-dataset {
+  background: rgba($blue1, 0.2);
+}
+
+.json-container {
+  margin-top: 1px;
+  height: 350px;
+  overflow-y: auto;
+}
