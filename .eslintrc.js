@@ -8,6 +8,7 @@ module.exports = {
     plugins: [
       "@typescript-eslint",
       "prettier",
+      "import"
     ],
 
     extends: [
@@ -40,7 +41,7 @@ module.exports = {
     settings: {
       "import/resolver": {
         node: {
-          extensions: [".js", ".jsx", ".ts", ".tsx"],
+          extensions: [".js", ".jsx", ".ts", ".tsx", ".d.ts"],
         }
       }
     }
