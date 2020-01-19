@@ -7,16 +7,23 @@ import classNames from "classnames";
 import * as React from "react";
 import { connect } from "react-redux";
 import ReactJson from "react-json-view";
+import { Dispatch } from "redux";
 import { IStoreState } from "../../store/state";
 import "./datasets.scss";
 import { Flexbox } from "../../common/flexbox";
+import { PingInternet } from "./pingInternet";
+import { SET_SINGLE_DATASET } from "../../store";
 
 interface IStateProps {
   datasetNames?: string[];
   singleDatasetInfo?: ISingleDataset;
 }
 
-type IProps = IStateProps;
+interface IDispatchProps {
+  resetSelectedDataset: () => void;
+}
+
+type IProps = IStateProps & IDispatchProps;
 
 class UnconnectedDatasets extends React.PureComponent<IProps> {
   public componentDidMount() {
@@ -40,12 +47,23 @@ class UnconnectedDatasets extends React.PureComponent<IProps> {
     }
 
     return (
-      <Flexbox className="datasets-container" flex="1" flexDirection="column">
-        {this.renderHeader()}
-        <div className="datasets-table">
-          {datasetNames.map(this.renderSingleDatasetName)}
+      <Flexbox flex="1">
+        {this.renderDatasetTable(datasetNames)}
+        {this.renderSingleDatasetInfo()}
+      </Flexbox>
+    );
+  }
+
+  private renderDatasetTable(datasetNames: string[]) {
+    return (
+      <Flexbox flex="1" flexDirection="column" justifyContent="space-between">
+        <div>
+          {this.renderHeader()}
+          <div className="datasets-table">
+            {datasetNames.map(this.renderSingleDatasetName)}
+          </div>
         </div>
-        {this.maybeRenderSingleDatasetInfo()}
+        <PingInternet />
       </Flexbox>
     );
   }
@@ -82,35 +100,61 @@ class UnconnectedDatasets extends React.PureComponent<IProps> {
     );
   };
 
-  private requestSingleDataset(datasetName: string) {
-    return () => {
-      RENDERER_ACTIONS.requestSingleDataset({ name: datasetName });
-    };
-  }
-
-  private maybeRenderSingleDatasetInfo() {
+  private renderSingleDatasetInfo() {
     const { singleDatasetInfo } = this.props;
     if (singleDatasetInfo === undefined) {
-      return null;
+      return (
+        <Flexbox className="json-container" flex="2">
+          <NonIdealState
+            description={
+              <div className="dataset-non-ideal">
+                Select a dataset to the left to explore.
+              </div>
+            }
+            icon="search"
+            title="No dataset selected."
+          />
+        </Flexbox>
+      );
     }
 
     return (
-      <div className="json-container">
+      <Flexbox className="json-container" flex="2">
         <ReactJson
           src={singleDatasetInfo.data}
           style={{ backgroundColor: "#1F2833" }}
-          theme="codeschool"
+          theme="monokai"
         />
-      </div>
+      </Flexbox>
     );
+  }
+
+  private requestSingleDataset(datasetName: string) {
+    return () => {
+      const { resetSelectedDataset, singleDatasetInfo } = this.props;
+      if (singleDatasetInfo?.datasetName === datasetName) {
+        resetSelectedDataset();
+      } else {
+        RENDERER_ACTIONS.requestSingleDataset({ name: datasetName });
+      }
+    };
   }
 }
 
 function mapStateToProps(state: IStoreState): IStateProps {
   return {
-    datasetNames: state.application.datasets?.datasetNames,
+    datasetNames: state.application.datasets?.datasetNames.sort(),
     singleDatasetInfo: state.application.singleDatasetInfo
   };
 }
 
-export const Datasets = connect(mapStateToProps)(UnconnectedDatasets);
+function mapDispatchToProps(dispatch: Dispatch): IDispatchProps {
+  return {
+    resetSelectedDataset: () => dispatch(SET_SINGLE_DATASET.create(undefined))
+  };
+}
+
+export const Datasets = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(UnconnectedDatasets);

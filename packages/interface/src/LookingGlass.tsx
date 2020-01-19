@@ -1,6 +1,8 @@
 import * as React from "react";
 import { connect } from "react-redux";
 import { Dispatch } from "redux";
+import { Classes } from "@blueprintjs/core";
+import classNames from "classnames";
 import { AnalyzeData } from "./components/analyzeData/analyzeData";
 import { CollectData } from "./components/collectData/collectData";
 import { Home } from "./components/home/home";
@@ -45,7 +47,7 @@ export class UnconnectedLookingGlass extends React.PureComponent<IProps> {
     } = this.props;
 
     return (
-      <div className="looking-glass-app">
+      <div className={classNames("looking-glass-app", Classes.DARK)}>
         <div className="draggable-bar" />
         <HomeBar />
         <Flexbox className="fade-in" flex="1" key={url}>

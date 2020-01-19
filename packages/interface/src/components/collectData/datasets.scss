@@ -1,8 +1,5 @@
 @import "../../utils/colors";
-
-.datasets-container {
-  padding: 10px 0;
-}
+@import "../../utils/utils";
 
 .dataset-header-text {
   margin-left: 10px;
@@ -13,6 +10,10 @@
 .datasets-table {
   margin-top: 10px;
   box-shadow: 0 1px $muted-text-color, 0 -1px $muted-text-color;
+}
+
+.dataset-non-ideal {
+  color: $muted-text-color;
 }
 
 .single-dataset {
@@ -30,7 +31,8 @@
 }
 
 .json-container {
-  margin-top: 1px;
-  height: 350px;
+  padding: 15px;
+  max-height: $height;
   overflow-y: auto;
+  box-shadow: -1px 0 $text-color;
 }
