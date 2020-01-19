@@ -36,16 +36,6 @@ class UnconnectedDatasets extends React.PureComponent<IProps> {
       return <Spinner />;
     }
 
-    if (datasetNames.length === 0) {
-      return (
-        <NonIdealState
-          description="Please gather some datasets before you can analyze them."
-          icon="warning-sign"
-          title="No datasets found"
-        />
-      );
-    }
-
     return (
       <Flexbox flex="1">
         {this.renderDatasetTable(datasetNames)}
@@ -59,9 +49,7 @@ class UnconnectedDatasets extends React.PureComponent<IProps> {
       <Flexbox flex="1" flexDirection="column" justifyContent="space-between">
         <div>
           {this.renderHeader()}
-          <div className="datasets-table">
-            {datasetNames.map(this.renderSingleDatasetName)}
-          </div>
+          {this.maybeRenderTable(datasetNames)}
         </div>
         <PingInternet />
       </Flexbox>
@@ -76,6 +64,24 @@ class UnconnectedDatasets extends React.PureComponent<IProps> {
           Dataset name ({datasetNames?.length})
         </span>
       </Flexbox>
+    );
+  }
+
+  private maybeRenderTable(datasetNames: string[]) {
+    if (datasetNames.length === 0) {
+      return (
+        <NonIdealState
+          description="Please gather some datasets before you can analyze them."
+          icon="warning-sign"
+          title="No datasets found"
+        />
+      );
+    }
+
+    return (
+      <div className="datasets-table">
+        {datasetNames.map(this.renderSingleDatasetName)}
+      </div>
     );
   }
 
