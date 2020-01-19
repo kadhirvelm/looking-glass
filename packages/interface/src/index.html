@@ -9,9 +9,24 @@
         <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
 
         <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
+
+        <style>
+            body {
+                margin: 0;
+                height: 100vh;
+                width: 100vw;
+            }
+
+            .main-app {
+                display: flex;
+                height: 100%;
+                width: 100%;
+                overflow: hidden;
+            }
+        </style>
     </head>
     <body>
-        <div id="main-app"></div>
+        <div id="main-app" class="main-app"></div>
 
         <!-- Main -->
         <script src="./index.js"></script>

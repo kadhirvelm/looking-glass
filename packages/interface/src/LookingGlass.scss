@@ -1,6 +1,9 @@
+@import "./utils/colors";
+
 .main {
   display: flex;
-  flex-direction: column;
-  height: 100%;
-  width: 100%;
+  flex: 1;
+  flex-direction: row;
+  background: $dark-gray;
+  color: $text-color;
 }
