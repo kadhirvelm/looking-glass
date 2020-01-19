@@ -1,9 +1,33 @@
 @import "./utils/colors";
+@import "./utils/utils";
 
-.main {
+.looking-glass-app {
   display: flex;
   flex: 1;
   flex-direction: row;
   background: $dark-gray;
   color: $text-color;
+}
+
+.draggable-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 15px;
+  z-index: 10;
+  -webkit-app-region: drag;
+}
+
+.fade-in {
+  animation: fade-in 400ms $transition;
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }

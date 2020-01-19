@@ -1,16 +1,18 @@
 import * as React from "react";
-import { Dispatch } from "redux";
 import { connect } from "react-redux";
-import { PingInternet } from "./components/pingInternet";
-import { Datasets } from "./components/datasets";
+import { Dispatch } from "redux";
+import { AnalyzeData } from "./components/analyzeData/analyzeData";
+import { CollectData } from "./components/collectData/collectData";
+import { Home } from "./components/home/home";
+import { HomeBar } from "./components/homeBar";
+import "./LookingGlass.scss";
 import {
   instantiateRendererListeners,
   removeListeners
 } from "./store/listener";
-import "./LookingGlass.scss";
-import { IUrlOptions, IRouteOption } from "./utils/typings";
-import { HomeBar } from "./components/homeBar";
 import { IStoreState } from "./store/state";
+import { IRouteOption, IUrlOptions } from "./utils/typings";
+import { Flexbox } from "./common/flexbox";
 
 interface IOwnProps {
   /**
@@ -38,46 +40,36 @@ export class UnconnectedLookingGlass extends React.PureComponent<IProps> {
   }
 
   public render() {
+    const {
+      route: { url }
+    } = this.props;
+
     return (
-      <div className="main">
+      <div className="looking-glass-app">
+        <div className="draggable-bar" />
         <HomeBar />
-        {this.renderPage()}
+        <Flexbox className="fade-in" flex="1" key={url}>
+          {this.renderCurrentRoutePage()}
+        </Flexbox>
       </div>
     );
   }
 
-  private renderPage() {
+  private renderCurrentRoutePage() {
     const {
       route: { url }
     } = this.props;
 
     switch (url) {
       case IUrlOptions.HOME:
-        return this.renderHome();
+        return <Home />;
       case IUrlOptions.COLLECT_DATA:
-        return this.renderCollectData();
+        return <CollectData />;
       case IUrlOptions.ANALYZE_DATA:
-        return this.renderAnalyzeData();
+        return <AnalyzeData />;
       default:
         return null;
     }
-  }
-
-  private renderHome() {
-    return <div className="main">Welcome to looking glass.</div>;
-  }
-
-  private renderCollectData() {
-    return (
-      <div className="main">
-        <PingInternet />
-        <Datasets />
-      </div>
-    );
-  }
-
-  private renderAnalyzeData() {
-    return <div className="main">To be implemented.</div>;
   }
 }
 

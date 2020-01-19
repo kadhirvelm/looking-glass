@@ -6,6 +6,7 @@ import { IRouteOption, IUrlOptions } from "../utils/typings";
 import "./homeBar.scss";
 import { IStoreState } from "../store/state";
 import { SET_ROUTE } from "../store";
+import { Flexbox } from "../common/flexbox";
 
 interface IStoreProps {
   url: IUrlOptions;
@@ -26,7 +27,9 @@ const ROUTES: Array<{ routeUrl: IUrlOptions; name: string }> = [
 export class UnconnectedHomeBar extends React.PureComponent<IProps> {
   public render() {
     return (
-      <div className="home-bar">{ROUTES.map(this.renderSingleRouteOption)}</div>
+      <Flexbox className="home-bar" flexDirection="column">
+        {ROUTES.map(this.renderSingleRouteOption)}
+      </Flexbox>
     );
   }
 
