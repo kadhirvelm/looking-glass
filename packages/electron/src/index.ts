@@ -11,7 +11,7 @@ function instantiateListeners() {
 
 function createWindow() {
   const basicWindow = new BrowserWindow({
-    width: 800,
+    width: 1200,
     height: 800,
     titleBarStyle: "hiddenInset",
     frame: false,

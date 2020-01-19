@@ -39,8 +39,7 @@ class UnconnectedPingInternet extends React.PureComponent<IProps> {
       return (
         <Flexbox flexDirection="column" justifyContent="flex-end">
           <span>
-            Is pinging! {JSON.stringify(pingStatus.pingRequest)} (
-            {pingPercentComplete?.totalDatapointsCollected}/
+            Collecting data ({pingPercentComplete?.totalDatapointsCollected}/
             {pingStatus.pingRequest?.totalTimes})
           </span>
           {this.maybeRenderPingPercent()}
@@ -50,11 +49,7 @@ class UnconnectedPingInternet extends React.PureComponent<IProps> {
 
     return (
       <Flexbox justifyContent="flex-end">
-        <Button
-          intent="primary"
-          onClick={this.startPinging}
-          text="Collect data"
-        />
+        <Button onClick={this.startPinging} text="Collect data" />
       </Flexbox>
     );
   }

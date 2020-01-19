@@ -12,7 +12,7 @@ export const SET_DATASETS = TypedAction.define("application/set-datasets")<
 
 export const SET_SINGLE_DATASET = TypedAction.define(
   "application/set-single-dataset"
-)<ISingleDataset>();
+)<ISingleDataset | undefined>();
 
 export const SET_PING_STATUS = TypedAction.define(
   "application/set-ping-status"

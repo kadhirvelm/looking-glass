@@ -10,7 +10,7 @@ function cleanAllPackages() {
     console.log(`\x1b[33mCleaning all packages and reinstalling dependencies. (1/${TOTAL_STEPS})\x1b[0m`);
     execSync("yarn clean", { stdio: "inherit" });
     console.log(`\x1b[37m\tReinstalling dependencies\x1b[0m`);
-    execSync("yarn", { stdio: "inherit" });
+    execSync("NODE_ENV=development yarn", { stdio: "inherit" });
     resolve();
   })
 }
@@ -20,7 +20,7 @@ function buildPackages() {
     console.log(`\x1b[33mBuilding dependencies in parallel. (2/${TOTAL_STEPS})\x1b[0m`);
 
     // NOTE: lerna takes care of resolving the dependency tree and building the packages in the correct order
-    const build = exec("yarn build");    
+    const build = exec("NODE_ENV=production yarn build");    
     Promise.all([build]).then(resolve);
   });
 }
