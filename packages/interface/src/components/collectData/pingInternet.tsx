@@ -7,7 +7,7 @@ import {
 } from "@looking-glass/application-server";
 import { Button, ProgressBar } from "@blueprintjs/core";
 import { connect } from "react-redux";
-import { IStoreState } from "../../store/state";
+import { IStoreState } from "../../store";
 import { Flexbox } from "../../common/flexbox";
 
 interface IStateProps {

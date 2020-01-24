@@ -15,6 +15,7 @@ import {
 import { IStoreState } from "./store/state";
 import { IRouteOption, IUrlOptions } from "./utils/typings";
 import { Flexbox } from "./common/flexbox";
+import { VerifyDialog } from "./common/verifyDialog";
 
 interface IOwnProps {
   /**
@@ -53,6 +54,7 @@ export class UnconnectedLookingGlass extends React.PureComponent<IProps> {
         <Flexbox className="fade-in" flex="1" key={url}>
           {this.renderCurrentRoutePage()}
         </Flexbox>
+        {this.renderGlobalDialogs()}
       </div>
     );
   }
@@ -72,6 +74,14 @@ export class UnconnectedLookingGlass extends React.PureComponent<IProps> {
       default:
         return null;
     }
+  }
+
+  private renderGlobalDialogs() {
+    return (
+      <>
+        <VerifyDialog />
+      </>
+    );
   }
 }
 

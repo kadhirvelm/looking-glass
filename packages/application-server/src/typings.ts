@@ -25,3 +25,7 @@ export type ISingleDataset = {
   datasetName: string;
   data: any;
 };
+
+export type IDeleteDatasetsRequest = {
+  datasetNames: string[];
+};
