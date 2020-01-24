@@ -7,12 +7,16 @@ import classNames from "classnames";
 import * as React from "react";
 import { connect } from "react-redux";
 import ReactJson from "react-json-view";
-import { Dispatch } from "redux";
-import { IStoreState } from "../../store/state";
+import { Dispatch, bindActionCreators } from "redux";
 import "./datasets.scss";
 import { Flexbox } from "../../common/flexbox";
 import { PingInternet } from "./pingInternet";
-import { SET_SINGLE_DATASET } from "../../store";
+import {
+  IStoreState,
+  SET_SINGLE_DATASET,
+  OPEN_VERIFY_DIALOG
+} from "../../store";
+import { IVerifyDialogProps } from "../../typings/store";
 
 interface IStateProps {
   datasetNames?: string[];
@@ -20,6 +24,7 @@ interface IStateProps {
 }
 
 interface IDispatchProps {
+  openVerifyDialog: (verifyDialogProps: IVerifyDialogProps) => void;
   resetSelectedDataset: () => void;
 }
 
@@ -100,7 +105,12 @@ class UnconnectedDatasets extends React.PureComponent<IProps> {
         <span>{datasetName}</span>
         <div>
           <Button disabled icon="merge-columns" minimal />
-          <Button disabled icon="cross" intent="danger" minimal />
+          <Button
+            icon="cross"
+            intent="danger"
+            minimal
+            onClick={this.handleDeleteDataset(datasetName)}
+          />
         </div>
       </Flexbox>
     );
@@ -145,6 +155,26 @@ class UnconnectedDatasets extends React.PureComponent<IProps> {
       }
     };
   }
+
+  private handleDeleteDataset = (datasetName: string) => () => {
+    const { openVerifyDialog } = this.props;
+    openVerifyDialog({
+      confirmButtonIntent: "danger",
+      confirmText: "Delete the dataset",
+      description: (
+        <span>
+          Are you sure you want to delete <b>{datasetName}</b>? This action is
+          irreversible.
+        </span>
+      ),
+      icon: "delete",
+      onConfirm: this.onConfirmation(datasetName),
+      title: "Confirm deleting dataset"
+    });
+  };
+
+  private onConfirmation = (datasetName: string) => () =>
+    RENDERER_ACTIONS.requestDeleteDataset({ datasetNames: [datasetName] });
 }
 
 function mapStateToProps(state: IStoreState): IStateProps {
@@ -156,6 +186,12 @@ function mapStateToProps(state: IStoreState): IStateProps {
 
 function mapDispatchToProps(dispatch: Dispatch): IDispatchProps {
   return {
+    ...bindActionCreators(
+      {
+        openVerifyDialog: OPEN_VERIFY_DIALOG.create
+      },
+      dispatch
+    ),
     resetSelectedDataset: () => dispatch(SET_SINGLE_DATASET.create(undefined))
   };
 }
