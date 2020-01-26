@@ -18,11 +18,14 @@ async function writeSingleDataPoint(
     internetManager.pingInternet("www.google.com", 5),
     internetManager.pingSpeedtest()
   ]);
+
   await fileManager.addToFile({
     localPing: response[0],
     internetPing: response[1],
-    speedTest: response[2]
+    speedTest: response[2],
+    timestamp: new Date()
   });
+
   onLocalProgress();
 }
 

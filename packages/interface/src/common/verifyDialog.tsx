@@ -48,9 +48,9 @@ class UnconnectedVerifyDialog extends React.PureComponent<IProps> {
   }
 
   private onConfirm = () => {
-    const { verifyDialogProps } = this.props;
+    const { closeVerifyDialog, verifyDialogProps } = this.props;
     verifyDialogProps?.onConfirm();
-    CLOSE_VERIFY_DIALOG();
+    closeVerifyDialog();
   };
 }
 

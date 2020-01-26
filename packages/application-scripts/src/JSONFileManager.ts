@@ -1,12 +1,6 @@
 import fs from "fs-extra";
-import { v4 } from "uuid";
-
-interface IFileMetadata {
-  id: string;
-  timestamp: Date;
-  name: string;
-  description: string;
-}
+import uuid, { v4 } from "uuid";
+import { IFileMetadata } from "./typings";
 
 export class JSONFileManager {
   private fullAddress: string;
@@ -33,7 +27,7 @@ export class JSONFileManager {
   public async addToFile(contents: any) {
     const currentFile = await this.readFile();
 
-    currentFile.data[new Date().toString()] = contents;
+    currentFile.data[uuid()] = contents;
 
     return fs.writeFileSync(
       this.fullAddress,
