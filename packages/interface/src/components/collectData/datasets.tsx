@@ -173,8 +173,11 @@ class UnconnectedDatasets extends React.PureComponent<IProps> {
     });
   };
 
-  private onConfirmation = (datasetName: string) => () =>
+  private onConfirmation = (datasetName: string) => () => {
+    const { resetSelectedDataset } = this.props;
     RENDERER_ACTIONS.requestDeleteDataset({ datasetNames: [datasetName] });
+    resetSelectedDataset();
+  };
 }
 
 function mapStateToProps(state: IStoreState): IStateProps {
