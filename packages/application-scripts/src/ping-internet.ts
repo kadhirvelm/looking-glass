@@ -1,16 +1,12 @@
-import { JSONFileManager } from "./JSONFileManager";
-import { InternetManager } from "./internetManager";
-import { CONSTANTS } from "./constants";
+import { JSONFileManager } from "./classes/JSONFileManager";
+import { InternetManager } from "./classes/internetManager";
+import { CONSTANTS } from "./utils/constants";
 
 const TOTAL_PROGRESS_PER_DATAPOINT = 4;
 
-const fileManager = new JSONFileManager(
-  `(${new Date().toUTCString()}).json`,
-  CONSTANTS.OUTPUT_DIRECTORY
-);
-
 async function writeSingleDataPoint(
   internetManager: InternetManager,
+  fileManager: JSONFileManager,
   onLocalProgress: () => void
 ) {
   const response = await Promise.all([
@@ -34,6 +30,7 @@ function writeDataset(
   maxDataPoints: number,
   timeInSecondsBetweenCollections: number,
   internetManager: InternetManager,
+  fileManager: JSONFileManager,
   onLocalProgress: () => void
 ) {
   return new Promise(async resolve => {
@@ -42,7 +39,7 @@ function writeDataset(
       return;
     }
 
-    await writeSingleDataPoint(internetManager, onLocalProgress);
+    await writeSingleDataPoint(internetManager, fileManager, onLocalProgress);
 
     setTimeout(async () => {
       await writeDataset(
@@ -50,6 +47,7 @@ function writeDataset(
         maxDataPoints,
         timeInSecondsBetweenCollections,
         internetManager,
+        fileManager,
         onLocalProgress
       );
       resolve();
@@ -73,16 +71,20 @@ export async function pingNTimes(
     );
   };
 
-  const internetManager = new InternetManager(onLocalProgress);
-
+  const fileManager = new JSONFileManager(
+    `(${new Date().toUTCString()}).json`,
+    CONSTANTS.OUTPUT_DIRECTORY
+  );
   await fileManager.instantiateBasicFile();
   onLocalProgress();
 
+  const internetManager = new InternetManager(onLocalProgress);
   await writeDataset(
     0,
     totalPings,
     timeInSecondsBetweenCollections,
     internetManager,
+    fileManager,
     onLocalProgress
   );
   onLocalProgress();

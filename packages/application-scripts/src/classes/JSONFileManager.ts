@@ -1,6 +1,6 @@
 import fs from "fs-extra";
 import uuid, { v4 } from "uuid";
-import { IFileMetadata } from "./typings";
+import { IFileMetadata } from "../typings";
 
 export class JSONFileManager {
   private fullAddress: string;

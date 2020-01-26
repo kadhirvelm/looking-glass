@@ -1,5 +1,5 @@
-import { JSONFileManager } from "./JSONFileManager";
-import { CONSTANTS } from "./constants";
+import { JSONFileManager } from "./classes/JSONFileManager";
+import { CONSTANTS } from "./utils/constants";
 
 export function getDatasets() {
   return new JSONFileManager("", CONSTANTS.OUTPUT_DIRECTORY).readDirectory();
