@@ -1,4 +1,4 @@
-import { NonIdealState, Spinner, Button } from "@blueprintjs/core";
+import { NonIdealState, Spinner, Button, Icon } from "@blueprintjs/core";
 import {
   ISingleDataset,
   RENDERER_ACTIONS
@@ -17,6 +17,7 @@ import {
   OPEN_VERIFY_DIALOG
 } from "../../store";
 import { IVerifyDialogProps } from "../../typings/store";
+import { OPEN_MERGE_DIALOG } from "../../store/interface/actions";
 
 interface IStateProps {
   datasetNames?: string[];
@@ -24,6 +25,7 @@ interface IStateProps {
 }
 
 interface IDispatchProps {
+  openMergeDialog: () => void;
   openVerifyDialog: (verifyDialogProps: IVerifyDialogProps) => void;
   resetSelectedDataset: () => void;
 }
@@ -56,17 +58,31 @@ class UnconnectedDatasets extends React.PureComponent<IProps> {
           {this.renderHeader()}
           {this.maybeRenderTable(datasetNames)}
         </div>
-        <PingInternet />
+        <div className="ping-internet-container">
+          <PingInternet />
+        </div>
       </Flexbox>
     );
   }
 
   private renderHeader() {
-    const { datasetNames } = this.props;
+    const { datasetNames, openMergeDialog } = this.props;
     return (
-      <Flexbox justifyContent="space-between">
+      <Flexbox
+        alignItems="center"
+        className="header-container"
+        justifyContent="space-between"
+      >
         <span className="dataset-header-text">
           Dataset name ({datasetNames?.length})
+        </span>
+        <span>
+          <Button
+            icon="merge-columns"
+            minimal
+            onClick={openMergeDialog}
+            text="Merge datasets"
+          />
         </span>
       </Flexbox>
     );
@@ -104,7 +120,6 @@ class UnconnectedDatasets extends React.PureComponent<IProps> {
       >
         <span>{datasetName}</span>
         <div>
-          <Button disabled icon="merge-columns" minimal />
           <Button
             icon="cross"
             intent="danger"
@@ -191,6 +206,7 @@ function mapDispatchToProps(dispatch: Dispatch): IDispatchProps {
   return {
     ...bindActionCreators(
       {
+        openMergeDialog: OPEN_MERGE_DIALOG.create,
         openVerifyDialog: OPEN_VERIFY_DIALOG.create
       },
       dispatch

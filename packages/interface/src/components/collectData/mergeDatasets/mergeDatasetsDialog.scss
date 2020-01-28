@@ -1,0 +1,26 @@
+@import "../../../utils/colors.scss";
+
+.merge-dialog-select-datasets-title {
+  margin-bottom: 10px;
+}
+
+.merge-dialog-dataset-container {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  border-radius: 3px;
+  box-shadow: 0 1px $divider, 0 -1px $divider, -1px 0 $divider, 1px 0 $divider;
+
+  >:not(:last-child) {
+    box-shadow: 0 1px $divider;
+  }
+}
+
+.merge-dialog-dataset {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.merge-dialog-selected-dataset {
+  background: rgba($blue1, 0.25);
+}

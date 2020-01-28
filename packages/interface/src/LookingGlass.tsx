@@ -1,7 +1,7 @@
 import * as React from "react";
 import { connect } from "react-redux";
 import { Dispatch } from "redux";
-import { Classes } from "@blueprintjs/core";
+import { Classes, Toaster, IToaster } from "@blueprintjs/core";
 import classNames from "classnames";
 import { AnalyzeData } from "./components/analyzeData/analyzeData";
 import { CollectData } from "./components/collectData/collectData";
@@ -16,6 +16,7 @@ import { IStoreState } from "./store/state";
 import { IRouteOption, IUrlOptions } from "./utils/typings";
 import { Flexbox } from "./common/flexbox";
 import { VerifyDialog } from "./common/verifyDialog";
+import { MergeDatasetsDialog } from "./components/collectData/mergeDatasets/mergeDatasetsDialog";
 
 interface IOwnProps {
   /**
@@ -80,6 +81,7 @@ export class UnconnectedLookingGlass extends React.PureComponent<IProps> {
     return (
       <>
         <VerifyDialog />
+        <MergeDatasetsDialog />
       </>
     );
   }

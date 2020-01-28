@@ -3,12 +3,21 @@ import {
   IDatasets,
   ISingleDataset,
   IPingStatus,
-  IPingPercentComplete
+  IPingPercentComplete,
+  IMergedDatasets
 } from "@looking-glass/application-server";
 
 export const SET_DATASETS = TypedAction.define("application/set-datasets")<
   IDatasets
 >();
+
+export const MERGING_DATASETS = TypedAction.defineWithoutPayload(
+  "application/merging-datasets"
+)();
+
+export const SET_NEWLY_MERGED_DATASET = TypedAction.define(
+  "application/set-newly-merged-dataset"
+)<IMergedDatasets>();
 
 export const SET_SINGLE_DATASET = TypedAction.define(
   "application/set-single-dataset"
