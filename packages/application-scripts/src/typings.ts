@@ -3,11 +3,12 @@ export interface IDatasetProvenance {
 }
 
 export interface IFileMetadata {
-  id: string;
-  timestamp: Date;
-  name: string;
-  description: string;
   datasetProvenance?: IDatasetProvenance;
+  description: string;
+  id: string;
+  partOfMergedDataset?: string[];
+  name: string;
+  timestamp: Date;
 }
 
 export interface IRowProvenanceMapping {
@@ -15,9 +16,7 @@ export interface IRowProvenanceMapping {
 }
 
 export interface ILookingGlassDataset {
-  root: {
-    data: any;
-    metadata: IFileMetadata;
-    rowProvenance: IRowProvenanceMapping;
-  };
+  data: any;
+  metadata: IFileMetadata;
+  rowProvenance: IRowProvenanceMapping;
 }

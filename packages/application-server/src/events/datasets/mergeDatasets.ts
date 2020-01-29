@@ -14,8 +14,8 @@ export const MERGED_DATASETS = new RendererListener<IMergedDatasets>(
 
 export const REQUEST_MERGE_DATASETS = new BasicAction<IRequestMergeDatasets>(
   CHANNELS.REQUEST_MERGE_DATASETS,
-  (event, requestMergeDatasets) => {
-    const newMergedDatasetName = mergeDatasets(
+  async (event, requestMergeDatasets) => {
+    const newMergedDatasetName = await mergeDatasets(
       requestMergeDatasets.datasetNames,
       requestMergeDatasets.outputDatasetName
     );

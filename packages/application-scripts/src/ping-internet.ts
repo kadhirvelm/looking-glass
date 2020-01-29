@@ -15,7 +15,7 @@ async function writeSingleDataPoint(
     internetManager.pingSpeedtest()
   ]);
 
-  await fileManager.addToFile({
+  fileManager.addToFile({
     localPing: response[0],
     internetPing: response[1],
     speedTest: response[2],

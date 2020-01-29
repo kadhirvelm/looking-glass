@@ -35,9 +35,9 @@ class UnconnectedMergeDatasetsDialog extends React.PureComponent<
   };
 
   public componentDidUpdate(prevProps: IProps) {
-    const { isMergeOngoing } = this.props;
+    const { closeDialog, isMergeOngoing } = this.props;
     if (!isMergeOngoing && prevProps.isMergeOngoing) {
-      this.setState({ selectedDatasets: new Set() });
+      this.setState({ selectedDatasets: new Set() }, closeDialog);
     }
   }
 
@@ -49,7 +49,8 @@ class UnconnectedMergeDatasetsDialog extends React.PureComponent<
       <Dialog isOpen={isMergeDatasetOpen} onClose={closeDialog}>
         <div className={Classes.DIALOG_BODY}>
           <div className="merge-dialog-select-datasets-title">
-            Select datasets to merge:
+            Select datasets to merge. Please note the datasets will be merged in
+            the order you specify.
           </div>
           {this.maybeRenderDatasetTable()}
         </div>
