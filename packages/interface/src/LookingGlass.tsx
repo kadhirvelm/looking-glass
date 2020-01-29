@@ -1,10 +1,13 @@
+import { Classes } from "@blueprintjs/core";
+import classNames from "classnames";
 import * as React from "react";
 import { connect } from "react-redux";
 import { Dispatch } from "redux";
-import { Classes, Toaster, IToaster } from "@blueprintjs/core";
-import classNames from "classnames";
+import { Flexbox } from "./common/flexbox";
+import { VerifyDialog } from "./common/verifyDialog";
 import { AnalyzeData } from "./components/analyzeData/analyzeData";
 import { CollectData } from "./components/collectData/collectData";
+import { MergeDatasetsDialog } from "./components/collectData/mergeDatasets/mergeDatasetsDialog";
 import { Home } from "./components/home/home";
 import { HomeBar } from "./components/homeBar";
 import "./LookingGlass.scss";
@@ -14,9 +17,6 @@ import {
 } from "./store/listener";
 import { IStoreState } from "./store/state";
 import { IRouteOption, IUrlOptions } from "./utils/typings";
-import { Flexbox } from "./common/flexbox";
-import { VerifyDialog } from "./common/verifyDialog";
-import { MergeDatasetsDialog } from "./components/collectData/mergeDatasets/mergeDatasetsDialog";
 
 interface IOwnProps {
   /**

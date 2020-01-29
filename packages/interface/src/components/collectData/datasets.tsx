@@ -1,23 +1,23 @@
-import { NonIdealState, Spinner, Button, Icon } from "@blueprintjs/core";
+import { Button, NonIdealState, Spinner } from "@blueprintjs/core";
 import {
   ISingleDataset,
   RENDERER_ACTIONS
 } from "@looking-glass/application-server";
 import classNames from "classnames";
 import * as React from "react";
-import { connect } from "react-redux";
 import ReactJson from "react-json-view";
-import { Dispatch, bindActionCreators } from "redux";
-import "./datasets.scss";
+import { connect } from "react-redux";
+import { bindActionCreators, Dispatch } from "redux";
 import { Flexbox } from "../../common/flexbox";
-import { PingInternet } from "./pingInternet";
 import {
   IStoreState,
-  SET_SINGLE_DATASET,
-  OPEN_VERIFY_DIALOG
+  OPEN_VERIFY_DIALOG,
+  SET_SINGLE_DATASET
 } from "../../store";
-import { IVerifyDialogProps } from "../../typings/store";
 import { OPEN_MERGE_DIALOG } from "../../store/interface/actions";
+import { IVerifyDialogProps } from "../../typings/store";
+import "./datasets.scss";
+import { PingInternet } from "./pingInternet";
 
 interface IStateProps {
   datasetNames?: string[];
