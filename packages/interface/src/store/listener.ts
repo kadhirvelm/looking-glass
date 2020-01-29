@@ -4,13 +4,16 @@ import {
   IDatasets,
   ISingleDataset,
   IPingStatus,
-  IPingPercentComplete
+  IPingPercentComplete,
+  IMergedDatasets
 } from "@looking-glass/application-server";
+import { showToast } from "../utils/createToaster";
 import {
   SET_DATASETS,
   SET_SINGLE_DATASET,
   SET_PING_STATUS,
-  SET_PING_PERCENT_COMPLETE
+  SET_PING_PERCENT_COMPLETE,
+  SET_NEWLY_MERGED_DATASET
 } from "./application";
 
 export function instantiateRendererListeners(dispatch: Dispatch) {
@@ -31,6 +34,16 @@ export function instantiateRendererListeners(dispatch: Dispatch) {
   RENDERER_LISTENERS.pingPercentComplete.listen(
     (_: any, pingPercentComplete: IPingPercentComplete) => {
       dispatch(SET_PING_PERCENT_COMPLETE.create(pingPercentComplete));
+    }
+  );
+
+  RENDERER_LISTENERS.mergedDatasets.listen(
+    (_: any, mergeResponse: IMergedDatasets) => {
+      showToast({
+        intent: "success",
+        message: `Successfully created new dataset: ${mergeResponse.newMergedDatasetName}.`
+      });
+      dispatch(SET_NEWLY_MERGED_DATASET.create(mergeResponse));
     }
   );
 }

@@ -1,6 +1,22 @@
+export interface IDatasetProvenance {
+  [id: string]: IFileMetadata;
+}
+
 export interface IFileMetadata {
-  id: string;
-  timestamp: Date;
-  name: string;
+  datasetProvenance?: IDatasetProvenance;
   description: string;
+  id: string;
+  partOfMergedDataset?: string[];
+  name: string;
+  timestamp: Date;
+}
+
+export interface IRowProvenanceMapping {
+  [id: string]: string;
+}
+
+export interface ILookingGlassDataset {
+  data: any;
+  metadata: IFileMetadata;
+  rowProvenance: IRowProvenanceMapping;
 }

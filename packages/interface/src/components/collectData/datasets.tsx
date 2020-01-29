@@ -1,22 +1,23 @@
-import { NonIdealState, Spinner, Button } from "@blueprintjs/core";
+import { Button, NonIdealState, Spinner } from "@blueprintjs/core";
 import {
   ISingleDataset,
   RENDERER_ACTIONS
 } from "@looking-glass/application-server";
 import classNames from "classnames";
 import * as React from "react";
-import { connect } from "react-redux";
 import ReactJson from "react-json-view";
-import { Dispatch, bindActionCreators } from "redux";
-import "./datasets.scss";
+import { connect } from "react-redux";
+import { bindActionCreators, Dispatch } from "redux";
 import { Flexbox } from "../../common/flexbox";
-import { PingInternet } from "./pingInternet";
 import {
   IStoreState,
-  SET_SINGLE_DATASET,
-  OPEN_VERIFY_DIALOG
+  OPEN_VERIFY_DIALOG,
+  SET_SINGLE_DATASET
 } from "../../store";
+import { OPEN_MERGE_DIALOG } from "../../store/interface/actions";
 import { IVerifyDialogProps } from "../../typings/store";
+import "./datasets.scss";
+import { PingInternet } from "./pingInternet";
 
 interface IStateProps {
   datasetNames?: string[];
@@ -24,6 +25,7 @@ interface IStateProps {
 }
 
 interface IDispatchProps {
+  openMergeDialog: () => void;
   openVerifyDialog: (verifyDialogProps: IVerifyDialogProps) => void;
   resetSelectedDataset: () => void;
 }
@@ -56,17 +58,31 @@ class UnconnectedDatasets extends React.PureComponent<IProps> {
           {this.renderHeader()}
           {this.maybeRenderTable(datasetNames)}
         </div>
-        <PingInternet />
+        <div className="ping-internet-container">
+          <PingInternet />
+        </div>
       </Flexbox>
     );
   }
 
   private renderHeader() {
-    const { datasetNames } = this.props;
+    const { datasetNames, openMergeDialog } = this.props;
     return (
-      <Flexbox justifyContent="space-between">
+      <Flexbox
+        alignItems="center"
+        className="header-container"
+        justifyContent="space-between"
+      >
         <span className="dataset-header-text">
           Dataset name ({datasetNames?.length})
+        </span>
+        <span>
+          <Button
+            icon="merge-columns"
+            minimal
+            onClick={openMergeDialog}
+            text="Merge datasets"
+          />
         </span>
       </Flexbox>
     );
@@ -104,7 +120,6 @@ class UnconnectedDatasets extends React.PureComponent<IProps> {
       >
         <span>{datasetName}</span>
         <div>
-          <Button disabled icon="merge-columns" minimal />
           <Button
             icon="cross"
             intent="danger"
@@ -191,6 +206,7 @@ function mapDispatchToProps(dispatch: Dispatch): IDispatchProps {
   return {
     ...bindActionCreators(
       {
+        openMergeDialog: OPEN_MERGE_DIALOG.create,
         openVerifyDialog: OPEN_VERIFY_DIALOG.create
       },
       dispatch

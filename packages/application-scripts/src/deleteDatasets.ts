@@ -1,6 +1,6 @@
 import { unlinkSync } from "fs-extra";
 import { join } from "path";
-import { CONSTANTS } from "./constants";
+import { CONSTANTS } from "./utils/constants";
 
 function deleteSingleDataset(path: string) {
   try {

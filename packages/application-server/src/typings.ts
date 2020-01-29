@@ -29,3 +29,12 @@ export type ISingleDataset = {
 export type IDeleteDatasetsRequest = {
   datasetNames: string[];
 };
+
+export interface IMergedDatasets extends IDatasets {
+  newMergedDatasetName: string;
+}
+
+export interface IRequestMergeDatasets {
+  datasetNames: string[];
+  outputDatasetName?: string;
+}
