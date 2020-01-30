@@ -3,7 +3,7 @@ import * as React from "react";
 import { Dispatch, bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { IRouteOption, IUrlOptions } from "../utils/typings";
-import "./homeBar.scss";
+import styles from "./homeBar.module.scss";
 import { IStoreState } from "../store/state";
 import { SET_ROUTE } from "../store";
 import { Flexbox } from "../common/flexbox";
@@ -27,7 +27,7 @@ const ROUTES: Array<{ routeUrl: IUrlOptions; name: string }> = [
 export class UnconnectedHomeBar extends React.PureComponent<IProps> {
   public render() {
     return (
-      <Flexbox className="home-bar" flexDirection="column">
+      <Flexbox className={styles.homeBar} flexDirection="column">
         {ROUTES.map(this.renderSingleRouteOption)}
       </Flexbox>
     );
@@ -42,8 +42,8 @@ export class UnconnectedHomeBar extends React.PureComponent<IProps> {
 
     return (
       <span
-        className={classNames("route-option", {
-          selected: url === routeUrl
+        className={classNames(styles.routeOption, {
+          [styles.selected]: url === routeUrl
         })}
         onClick={this.handleOnClick(routeUrl)}
       >

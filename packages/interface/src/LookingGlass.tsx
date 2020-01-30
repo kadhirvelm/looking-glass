@@ -10,13 +10,13 @@ import { CollectData } from "./components/collectData/collectData";
 import { MergeDatasetsDialog } from "./components/collectData/mergeDatasets/mergeDatasetsDialog";
 import { Home } from "./components/home/home";
 import { HomeBar } from "./components/homeBar";
-import "./LookingGlass.scss";
 import {
   instantiateRendererListeners,
   removeListeners
 } from "./store/listener";
 import { IStoreState } from "./store/state";
 import { IRouteOption, IUrlOptions } from "./utils/typings";
+import styles from "./LookingGlass.module.scss";
 
 interface IOwnProps {
   /**
@@ -49,10 +49,10 @@ export class UnconnectedLookingGlass extends React.PureComponent<IProps> {
     } = this.props;
 
     return (
-      <div className={classNames("looking-glass-app", Classes.DARK)}>
-        <div className="draggable-bar" />
+      <div className={classNames(styles.lookingGlassApp, Classes.DARK)}>
+        <div className={styles.draggableBar} />
         <HomeBar />
-        <Flexbox className="fade-in" flex="1" key={url}>
+        <Flexbox className={styles.fadeIn} flex="1" key={url}>
           {this.renderCurrentRoutePage()}
         </Flexbox>
         {this.renderGlobalDialogs()}

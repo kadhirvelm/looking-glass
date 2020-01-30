@@ -1,10 +1,10 @@
 @import "../../../utils/colors.scss";
 
-.merge-dialog-select-datasets-title {
+.select-datasets-title {
   margin-bottom: 10px;
 }
 
-.merge-dialog-dataset-container {
+.dataset-container {
   display: flex;
   flex-direction: column;
   flex: 1;
@@ -17,11 +17,11 @@
   }
 }
 
-.merge-dialog-dataset {
+.dataset {
   padding: 10px;
   cursor: pointer;
 }
 
-.merge-dialog-selected-dataset {
+.selected-dataset {
   background: rgba($blue1, 0.25);
 }

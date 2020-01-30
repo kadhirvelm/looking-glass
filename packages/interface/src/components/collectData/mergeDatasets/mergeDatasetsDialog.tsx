@@ -7,7 +7,7 @@ import classNames from "classnames";
 import { IStoreState } from "../../../store/state";
 import { DIALOGS } from "../../../typings/constants";
 import { CLOSE_MERGE_DIALOG, MERGING_DATASETS } from "../../../store";
-import "./mergeDatasetsDialog.scss";
+import styles from "./mergeDatasetsDialog.module.scss";
 
 interface IStoreProps {
   datasetNames?: string[];
@@ -48,7 +48,7 @@ class UnconnectedMergeDatasetsDialog extends React.PureComponent<
     return (
       <Dialog isOpen={isMergeDatasetOpen} onClose={closeDialog}>
         <div className={Classes.DIALOG_BODY}>
-          <div className="merge-dialog-select-datasets-title">
+          <div className={styles.selectDatasetsTitle}>
             Select datasets to merge. Please note the datasets will be merged in
             the order you specify.
           </div>
@@ -75,7 +75,7 @@ class UnconnectedMergeDatasetsDialog extends React.PureComponent<
     }
 
     return (
-      <div className="merge-dialog-dataset-container">
+      <div className={styles.datasetContainer}>
         {datasetNames?.map(this.renderSingleDataset)}
       </div>
     );
@@ -85,8 +85,8 @@ class UnconnectedMergeDatasetsDialog extends React.PureComponent<
     const { selectedDatasets } = this.state;
     return (
       <div
-        className={classNames("merge-dialog-dataset", {
-          "merge-dialog-selected-dataset": selectedDatasets.has(datasetName)
+        className={classNames(styles.dataset, {
+          [styles.selectedDataset]: selectedDatasets.has(datasetName)
         })}
         onClick={this.toggleDatasetSelected(datasetName)}
       >
