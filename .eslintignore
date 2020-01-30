@@ -4,3 +4,4 @@ node_modules/*
 distribution/*
 production/*
 webpack.config.js
+*.d.ts

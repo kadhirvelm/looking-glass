@@ -16,8 +16,8 @@ import {
 } from "../../store";
 import { OPEN_MERGE_DIALOG } from "../../store/interface/actions";
 import { IVerifyDialogProps } from "../../typings/store";
-import "./datasets.scss";
 import { PingInternet } from "./pingInternet";
+import styles from "./datasets.module.scss";
 
 interface IStateProps {
   datasetNames?: string[];
@@ -70,10 +70,10 @@ class UnconnectedDatasets extends React.PureComponent<IProps> {
     return (
       <Flexbox
         alignItems="center"
-        className="header-container"
+        className={styles.headerContainer}
         justifyContent="space-between"
       >
-        <span className="dataset-header-text">
+        <span className={styles.datasetHeaderText}>
           Dataset name ({datasetNames?.length})
         </span>
         <span>
@@ -100,7 +100,7 @@ class UnconnectedDatasets extends React.PureComponent<IProps> {
     }
 
     return (
-      <div className="datasets-table">
+      <div className={styles.datasetsTable}>
         {datasetNames.map(this.renderSingleDatasetName)}
       </div>
     );
@@ -111,8 +111,9 @@ class UnconnectedDatasets extends React.PureComponent<IProps> {
     return (
       <Flexbox
         alignItems="center"
-        className={classNames("single-dataset", {
-          "selected-dataset": singleDatasetInfo?.datasetName === datasetName
+        className={classNames(styles.singleDataset, {
+          [styles.selectedDataset]:
+            singleDatasetInfo?.datasetName === datasetName
         })}
         key={datasetName}
         justifyContent="space-between"
@@ -135,7 +136,7 @@ class UnconnectedDatasets extends React.PureComponent<IProps> {
     const { singleDatasetInfo } = this.props;
     if (singleDatasetInfo === undefined) {
       return (
-        <Flexbox className="json-container" flex="2">
+        <Flexbox className={styles.jsonContainer} flex="2">
           <NonIdealState
             description={
               <div className="dataset-non-ideal">
@@ -150,7 +151,7 @@ class UnconnectedDatasets extends React.PureComponent<IProps> {
     }
 
     return (
-      <Flexbox className="json-container" flex="2">
+      <Flexbox className={styles.jsonContainer} flex="2">
         <ReactJson
           src={singleDatasetInfo.data}
           style={{ backgroundColor: "#1F2833" }}

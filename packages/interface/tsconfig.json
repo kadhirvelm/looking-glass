@@ -9,6 +9,6 @@
         "types": ["webpack-env"],
         "moduleResolution": "node"
     },
-    "include": ["./src/**/*"],
+    "include": ["./src/**/*", "./typings/*.ts"],
     "exclude": ["./dist/*", "./node_modules/*", "./webpack.config.js"]
 }
