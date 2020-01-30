@@ -1,0 +1,32 @@
+@import "../../utils/looking-glass.scss";
+
+.metadata-container {
+  height: 100px;
+  padding: 10px;
+  overflow-y: auto;
+  box-shadow: 0 1px rgba($text-color, 0.5);
+  background: rgba($black, 0.25);
+  z-index: 1;
+
+  > :not(:last-child) {
+    padding-bottom: 5px;
+  }
+}
+
+.json-container {
+  padding: 15px;
+  max-height: calc(100vh - 110px);
+  overflow-y: auto;
+}
+
+.dataset-non-ideal {
+  color: $muted-text-color;
+}
+
+.metadata-title {
+  color: $muted-text-color;
+}
+
+.metadata-value {
+  margin-left: 10px;
+}

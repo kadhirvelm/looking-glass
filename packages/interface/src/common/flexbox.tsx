@@ -4,7 +4,8 @@ import {
   FlexDirectionProperty,
   FlexProperty,
   AlignItemsProperty,
-  JustifyContentProperty
+  JustifyContentProperty,
+  FlexWrapProperty
 } from "csstype";
 import classNames from "classnames";
 
@@ -13,6 +14,7 @@ interface IProps {
   className?: string;
   flexDirection?: FlexDirectionProperty;
   flex?: FlexProperty<string>;
+  flexWrap?: FlexWrapProperty;
   justifyContent?: JustifyContentProperty;
   onClick?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
 }

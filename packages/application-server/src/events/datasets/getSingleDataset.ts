@@ -18,7 +18,7 @@ export const REQUEST_SINGLE_DATASET = new BasicAction<ISingleDatasetRequest>(
     event.sender.send(
       GET_SINGLE_DATASET.channel,
       GET_SINGLE_DATASET.verifyArgs({
-        data: singleDataset,
+        dataFile: singleDataset,
         datasetName: datasetName.name
       })
     );
