@@ -3,7 +3,6 @@ import { ISingleDataset } from "@looking-glass/application-server";
 import { connect } from "react-redux";
 import { NonIdealState } from "@blueprintjs/core";
 import ReactJson from "react-json-view";
-import { IFileMetadata } from "@looking-glass/application-scripts/dist/typings";
 import { Flexbox } from "../../common/flexbox";
 import { IStoreState } from "../../store/state";
 import styles from "./singleDataset.module.scss";
