@@ -1,5 +1,4 @@
-@import "../../utils/colors";
-@import "../../utils/utils";
+@import "../../utils/looking-glass.scss";
 
 .header-container {
   padding: 10px;
@@ -13,10 +12,6 @@
   box-shadow: 0 1px $muted-text-color, 0 -1px $muted-text-color;
 }
 
-.dataset-non-ideal {
-  color: $muted-text-color;
-}
-
 .single-dataset {
   padding: 5px 10px;
   box-shadow: 0 1px $muted-text-color;
@@ -27,17 +22,18 @@
   }
 }
 
+.left-container {
+  max-height: 100vh;
+}
+
+.single-dataset-container {
+  box-shadow: -1px 0 $text-color;
+}
+
 .selected-dataset {
   background: rgba($blue1, 0.2);
 }
 
 .ping-internet-container {
   padding: 10px;
-}
-
-.json-container {
-  padding: 15px;
-  max-height: $height;
-  overflow-y: auto;
-  box-shadow: -1px 0 $text-color;
 }

@@ -5,7 +5,6 @@ import {
 } from "@looking-glass/application-server";
 import classNames from "classnames";
 import * as React from "react";
-import ReactJson from "react-json-view";
 import { connect } from "react-redux";
 import { bindActionCreators, Dispatch } from "redux";
 import { Flexbox } from "../../common/flexbox";
@@ -18,6 +17,7 @@ import { OPEN_MERGE_DIALOG } from "../../store/interface/actions";
 import { IVerifyDialogProps } from "../../typings/store";
 import { PingInternet } from "./pingInternet";
 import styles from "./datasets.module.scss";
+import { SingleDataset } from "./singleDataset";
 
 interface IStateProps {
   datasetNames?: string[];
@@ -46,19 +46,26 @@ class UnconnectedDatasets extends React.PureComponent<IProps> {
     return (
       <Flexbox flex="1">
         {this.renderDatasetTable(datasetNames)}
-        {this.renderSingleDatasetInfo()}
+        <Flexbox className={styles.singleDatasetContainer} flex="2">
+          <SingleDataset />
+        </Flexbox>
       </Flexbox>
     );
   }
 
   private renderDatasetTable(datasetNames: string[]) {
     return (
-      <Flexbox flex="1" flexDirection="column" justifyContent="space-between">
+      <Flexbox
+        className={styles.leftContainer}
+        flex="1"
+        flexDirection="column"
+        justifyContent="space-between"
+      >
         <div>
           {this.renderHeader()}
           {this.maybeRenderTable(datasetNames)}
         </div>
-        <div className="ping-internet-container">
+        <div className={styles.pingInternetContainer}>
           <PingInternet />
         </div>
       </Flexbox>
@@ -131,35 +138,6 @@ class UnconnectedDatasets extends React.PureComponent<IProps> {
       </Flexbox>
     );
   };
-
-  private renderSingleDatasetInfo() {
-    const { singleDatasetInfo } = this.props;
-    if (singleDatasetInfo === undefined) {
-      return (
-        <Flexbox className={styles.jsonContainer} flex="2">
-          <NonIdealState
-            description={
-              <div className="dataset-non-ideal">
-                Select a dataset to the left to explore.
-              </div>
-            }
-            icon="search"
-            title="No dataset selected."
-          />
-        </Flexbox>
-      );
-    }
-
-    return (
-      <Flexbox className={styles.jsonContainer} flex="2">
-        <ReactJson
-          src={singleDatasetInfo.data}
-          style={{ backgroundColor: "#1F2833" }}
-          theme="monokai"
-        />
-      </Flexbox>
-    );
-  }
 
   private requestSingleDataset(datasetName: string) {
     return () => {

@@ -2,13 +2,13 @@
 declare namespace DatasetsModuleScssModule {
   export interface IDatasetsModuleScss {
     datasetHeaderText: string;
-    datasetNonIdeal: string;
     datasetsTable: string;
     headerContainer: string;
-    jsonContainer: string;
+    leftContainer: string;
     pingInternetContainer: string;
     selectedDataset: string;
     singleDataset: string;
+    singleDatasetContainer: string;
   }
 }
 

@@ -1,3 +1,5 @@
+import { ILookingGlassDataset } from "@looking-glass/application-scripts/dist/typings";
+
 export interface IPing {
   totalTimes: number;
   timeBetweenPings: number;
@@ -23,7 +25,7 @@ export interface ISingleDatasetRequest {
 
 export type ISingleDataset = {
   datasetName: string;
-  data: any;
+  dataFile: ILookingGlassDataset;
 };
 
 export type IDeleteDatasetsRequest = {

@@ -24,6 +24,7 @@
   "homepage": "https://github.com/kadhirvelm/looking-glass#readme",
   "dependencies": {
     "@blueprintjs/core": "^3.22.3",
+    "@looking-glass/application-scripts": "^1.0.0",
     "@looking-glass/application-server": "^1.0.0",
     "classnames": "^2.2.6",
     "csstype": "^2.6.8",
