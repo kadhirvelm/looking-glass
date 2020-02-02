@@ -22,15 +22,9 @@ class UnconnectedSingleDataset extends React.PureComponent<IProps> {
     }
 
     return (
-      <Flexbox flexDirection="column">
+      <Flexbox className={styles.fadeIn} flex="1" flexDirection="column">
         {this.renderMetadata(singleDatasetInfo)}
-        <Flexbox className={styles.jsonContainer}>
-          <ReactJson
-            src={singleDatasetInfo.dataFile.data}
-            style={{ backgroundColor: "#1F2833" }}
-            theme="monokai"
-          />
-        </Flexbox>
+        {this.renderReactJSON(singleDatasetInfo.dataFile.data)}
       </Flexbox>
     );
   }
@@ -38,6 +32,7 @@ class UnconnectedSingleDataset extends React.PureComponent<IProps> {
   private renderNonIdealState() {
     return (
       <NonIdealState
+        className={styles.fadeIn}
         description={
           <div className={styles.datasetNonIdeal}>
             Select a dataset to the left to explore.
@@ -53,6 +48,7 @@ class UnconnectedSingleDataset extends React.PureComponent<IProps> {
     const { metadata } = singleDatasetInfo.dataFile;
     return (
       <Flexbox className={styles.metadataContainer} flexDirection="column">
+        <div className={styles.metadataContainerLabel}>Metadata</div>
         {METADATA.map(value =>
           this.renderSingleMetadataValue(
             value.title,
@@ -73,9 +69,22 @@ class UnconnectedSingleDataset extends React.PureComponent<IProps> {
         >
           {key}
         </Flexbox>
-        <Flexbox className={styles.metadataValue} flex="3" flexWrap="wrap">
+        <Flexbox className={styles.metadataValue} flex="5" flexWrap="wrap">
           {value}
         </Flexbox>
+      </Flexbox>
+    );
+  }
+
+  private renderReactJSON(data: any) {
+    return (
+      <Flexbox className={styles.jsonContainer}>
+        <div className={styles.jsonContainerLabel}>Raw data</div>
+        <ReactJson
+          src={data}
+          style={{ backgroundColor: styles.darkGray }}
+          theme="monokai"
+        />
       </Flexbox>
     );
   }

@@ -1,14 +1,13 @@
-import * as React from "react";
-import {
-  IPingStatus,
-  RENDERER_LISTENERS,
-  RENDERER_ACTIONS,
-  IPingPercentComplete
-} from "@looking-glass/application-server";
 import { Button, ProgressBar } from "@blueprintjs/core";
+import {
+  IPingPercentComplete,
+  IPingStatus,
+  RENDERER_ACTIONS
+} from "@looking-glass/application-server";
+import * as React from "react";
 import { connect } from "react-redux";
-import { IStoreState } from "../../store";
 import { Flexbox } from "../../common/flexbox";
+import { IStoreState } from "../../store";
 
 interface IStateProps {
   pingStatus?: IPingStatus;
@@ -22,24 +21,14 @@ class UnconnectedPingInternet extends React.PureComponent<IProps> {
     RENDERER_ACTIONS.getPingStatus({});
   }
 
-  public componentDidUpdate(newProps: IProps) {
-    const { pingStatus } = this.props;
-    if (pingStatus?.isPinging && !newProps.pingStatus?.isPinging) {
-      RENDERER_ACTIONS.requestDatasets({});
-    }
-  }
-
-  public componentWillUnmount() {
-    RENDERER_LISTENERS.pingStatus.removeListener();
-  }
-
   public render() {
     const { pingStatus, pingPercentComplete } = this.props;
     if (pingStatus !== undefined && pingStatus.isPinging) {
       return (
         <Flexbox flexDirection="column" justifyContent="flex-end">
           <span>
-            Collecting data ({pingPercentComplete?.totalDatapointsCollected}/
+            Collecting data (
+            {pingPercentComplete?.totalDatapointsCollected ?? "?"}/
             {pingStatus.pingRequest?.totalTimes})
           </span>
           {this.maybeRenderPingPercent()}

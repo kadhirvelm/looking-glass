@@ -34,12 +34,12 @@ class UnconnectedVerifyDialog extends React.PureComponent<IProps> {
           <div className={Classes.DIALOG_FOOTER_ACTIONS}>
             <Button
               onClick={closeVerifyDialog}
-              text={verifyDialogProps?.cancelText || "Cancel"}
+              text={verifyDialogProps?.cancelText ?? "Cancel"}
             />
             <Button
               intent={verifyDialogProps?.confirmButtonIntent}
               onClick={this.onConfirm}
-              text={verifyDialogProps?.confirmText || "Yes"}
+              text={verifyDialogProps?.confirmText ?? "Yes"}
             />
           </div>
         </div>

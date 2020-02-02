@@ -18,13 +18,13 @@ const ID: IMetadataRender<"id"> = {
 const NAME: IMetadataRender<"name"> = {
   key: "name",
   title: "Name",
-  toString: val => val.toString()
+  toString: val => val.toString() ?? "Unknown"
 };
 
 const DESCRIPTION: IMetadataRender<"description"> = {
   key: "description",
   title: "Description",
-  toString: val => val.toString()
+  toString: val => val.toString() ?? "Unknown"
 };
 
 const TIMESTAMP: IMetadataRender<"timestamp"> = {
@@ -36,7 +36,7 @@ const TIMESTAMP: IMetadataRender<"timestamp"> = {
 const PART_OF_MERGED_DATASET: IMetadataRender<"partOfMergedDataset"> = {
   key: "partOfMergedDataset",
   title: "Part of datasets:",
-  toString: val => val?.join(", ") || ""
+  toString: val => val?.join(", ") ?? "None"
 };
 
 export const METADATA = [
