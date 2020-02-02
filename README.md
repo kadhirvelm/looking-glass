@@ -1,10 +1,7 @@
 # looking-glass
 A desktop application that allows you to see patterns in data.
 
-[![CircleCI](https://circleci.com/gh/kadhirvelm/looking-glass.svg?style=svg)](https://circleci.com/gh/kadhirvelm/looking-glass) [![BCH compliance](https://bettercodehub.com/edge/badge/kadhirvelm/looking-glass?branch=develop)](https://bettercodehub.com/) [![Mergify Status](https://img.shields.io/endpoint.svg?url=https://dashboard.mergify.io/badges/kadhirvelm/looking-glass&style=flat)](https://mergify.io)
-
-[mergify]: https://mergify.io
-[mergify-status]: https://img.shields.io/endpoint.svg?url=https://gh.mergify.io/badges/<owner>/<repo>&style=flat
+[![CircleCI](https://circleci.com/gh/kadhirvelm/looking-glass.svg?style=svg)](https://circleci.com/gh/kadhirvelm/looking-glass) [![BCH compliance](https://bettercodehub.com/edge/badge/kadhirvelm/looking-glass?branch=develop)](https://bettercodehub.com/) [![Mergify Status](https://img.shields.io/endpoint.svg?url=https://dashboard.mergify.io/badges/kadhirvelm/looking-glass&style=flat)](https://mergify.io) [![Known Vulnerabilities](https://snyk.io/test/github/kadhirvelm/looking-glass/badge.svg)](https://snyk.io/test/github/kadhirvelm/looking-glass)
 
 ## Dev instructions
 1. Pull the repo and install the dependencies using `yarn`
