@@ -38,7 +38,7 @@ class UnconnectedDatasets extends React.PureComponent<IProps> {
   }
 
   public render() {
-    const { datasetNames } = this.props;
+    const { datasetNames, singleDatasetInfo } = this.props;
     if (datasetNames === undefined) {
       return <Spinner />;
     }
@@ -47,7 +47,7 @@ class UnconnectedDatasets extends React.PureComponent<IProps> {
       <Flexbox flex="1">
         {this.renderDatasetTable(datasetNames)}
         <Flexbox className={styles.singleDatasetContainer} flex="2">
-          <SingleDataset />
+          <SingleDataset key={singleDatasetInfo?.datasetName} />
         </Flexbox>
       </Flexbox>
     );

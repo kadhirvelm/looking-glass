@@ -1,6 +1,7 @@
-import { pingNTimes } from "@looking-glass/application-scripts";
+import { pingNTimes, getDatasets } from "@looking-glass/application-scripts";
 import { RendererListener, BasicAction } from "../../classes";
 import { IPingStatus, IPingPercentComplete, IPing } from "../../typings";
+import { GET_DATASETS } from "../datasets/getDataset";
 
 enum CHANNELS {
   GET_PING_STATUS = "get-ping-status",
@@ -47,6 +48,12 @@ export const START_PING = new BasicAction<IPing>(
     event.sender.send(
       PING_STATUS.channel,
       PING_STATUS.verifyArgs(CURRENT_PING_STATUS_IN_MEMORY)
+    );
+
+    const datasetNames = getDatasets();
+    event.sender.send(
+      GET_DATASETS.channel,
+      GET_DATASETS.verifyArgs({ datasetNames })
     );
   }
 );

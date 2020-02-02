@@ -10,16 +10,31 @@ import {
 import { IVerifyDialogProps } from "../../typings/store";
 import { DIALOGS } from "../../typings/constants";
 
-export interface IInterfaceState {
-  openDialog: DIALOGS | undefined;
+export interface IInterfacePersistedState {
   route: IRouteOption;
+}
+
+export interface IInterfaceMemoryState {
+  openDialog: DIALOGS | undefined;
   verifyDialogProps: IVerifyDialogProps | undefined;
 }
 
-export const EMPTY_INTERFACE_STATE: IInterfaceState = {
+export const EMPTY_PERSISTED_STATE: IInterfacePersistedState = {
+  route: { url: IUrlOptions.HOME }
+};
+
+export const EMPTY_LOCAL_INTERFACE_STATE: IInterfaceMemoryState = {
   openDialog: undefined,
-  route: { url: IUrlOptions.HOME },
   verifyDialogProps: undefined
+};
+
+export interface IInterfaceState
+  extends IInterfacePersistedState,
+    IInterfaceMemoryState {}
+
+export const EMPTY_INTERFACE_STATE: IInterfaceState = {
+  ...EMPTY_PERSISTED_STATE,
+  ...EMPTY_LOCAL_INTERFACE_STATE
 };
 
 export const interfaceReducer = TypedReducer.builder<IInterfaceState>()

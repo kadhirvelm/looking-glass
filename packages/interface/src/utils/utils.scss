@@ -1,1 +1,14 @@
 $transition: cubic-bezier(.09,.91,.46,1.05);
+
+%fade-in {
+  animation: fade-in 400ms $transition;
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
