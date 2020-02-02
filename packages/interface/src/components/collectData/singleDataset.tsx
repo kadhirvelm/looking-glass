@@ -7,7 +7,6 @@ import { Flexbox } from "../../common/flexbox";
 import { IStoreState } from "../../store/state";
 import styles from "./singleDataset.module.scss";
 import { METADATA } from "../../utils/getMetadata";
-import colors from "../../utils/colors.scss";
 
 interface IStoreProps {
   singleDatasetInfo: ISingleDataset | undefined;
@@ -83,7 +82,7 @@ class UnconnectedSingleDataset extends React.PureComponent<IProps> {
         <div className={styles.jsonContainerLabel}>Raw data</div>
         <ReactJson
           src={data}
-          style={{ backgroundColor: colors.darkGray }}
+          style={{ backgroundColor: styles.darkGray }}
           theme="monokai"
         />
       </Flexbox>
