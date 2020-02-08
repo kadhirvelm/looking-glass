@@ -6,7 +6,7 @@ version: 2
 jobs:
     setup:
         docker:
-            - image: circleci/node:10.18.0
+            - image: circleci/node:10.19.0
         steps:
             - checkout
             - restore_cache:
@@ -22,7 +22,7 @@ jobs:
                 key: v1-dependencies-{{ checksum "package.json" }}
     build:
         docker:
-            - image: circleci/node:10.18.0
+            - image: circleci/node:10.19.0
         steps:
             - checkout
             - restore_cache:
@@ -37,7 +37,7 @@ jobs:
                 command: NODE_ENV=production yarn build
     lint:
         docker:
-            - image: circleci/node:10.18.0
+            - image: circleci/node:10.19.0
         steps:
             - checkout
             - restore_cache:
@@ -55,7 +55,7 @@ jobs:
                 command: NODE_ENV=development yarn lint
     clean-lock:
         docker:
-            - image: circleci/node:10.18.0
+            - image: circleci/node:10.19.0
         steps:
             - checkout
             - run:
@@ -63,7 +63,7 @@ jobs:
                 command: NODE_ENV=development node ./scripts/cleanLock.js
     dry-distribution:
         docker:
-            - image: circleci/node:10.18.0
+            - image: circleci/node:10.19.0
         steps:
             - checkout
             - restore_cache:
