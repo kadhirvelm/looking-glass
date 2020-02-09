@@ -18,6 +18,12 @@ interface IDispatchProps {
 
 type IProps = IStateProps & IDispatchProps;
 
+/**
+ * Note: this is to help increase the speed of the first render cycle since it won't
+ * import recharts until the user requests it.
+ */
+const ChartSingleDataset = React.lazy(() => import("./chartSingleDataset"));
+
 class UnconnectedAnalyzeData extends React.PureComponent<IProps> {
   public componentDidMount() {
     RENDERER_ACTIONS.requestDatasets({});
@@ -30,9 +36,9 @@ class UnconnectedAnalyzeData extends React.PureComponent<IProps> {
     }
 
     return (
-      <Flexbox alignItems="center" flex="1" justifyContent="center">
-        To be implemented.
-      </Flexbox>
+      <React.Suspense fallback="Loading…">
+        <ChartSingleDataset analyzeDatasetName={analyzeDatasetName} />
+      </React.Suspense>
     );
   }
 
