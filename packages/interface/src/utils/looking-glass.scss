@@ -1,2 +1,4 @@
 @import "./colors.scss";
 @import "./utils.scss";
+
+$box-shadow-border: 0 1px $muted-text-color, 0 -1px $muted-text-color, -1px 0 $muted-text-color, 1px 0 $muted-text-color;

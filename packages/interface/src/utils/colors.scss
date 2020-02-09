@@ -17,6 +17,8 @@ $dark-gray: #1F2833;
 $black: #0B0C10;
 
 $divider: rgba($dark-gray, 0.1);
+$hover-color: rgba($text-color, 0.1);
+$selected-color: rgba($blue1, 0.2);
 
 :export {
   darkGray: $dark-gray;

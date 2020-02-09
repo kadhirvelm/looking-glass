@@ -18,7 +18,7 @@
   cursor: pointer;
 
   &:hover {
-    background: rgba($text-color, 0.1);
+    background: $hover-color;
   }
 }
 
@@ -31,7 +31,7 @@
 }
 
 .selected-dataset {
-  background: rgba($blue1, 0.2);
+  background: $selected-color;
 }
 
 .ping-internet-container {
