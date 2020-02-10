@@ -1,16 +1,18 @@
-import { TypedReducer, setWith } from "redoodle";
+import { setWith, TypedReducer } from "redoodle";
+import { DIALOGS } from "../../typings/constants";
+import { IVerifyDialogProps } from "../../typings/store";
 import { IRouteOption, IUrlOptions } from "../../utils/typings";
 import {
-  SET_ROUTE,
+  CLOSE_MERGE_DIALOG,
   CLOSE_VERIFY_DIALOG,
-  OPEN_VERIFY_DIALOG,
   OPEN_MERGE_DIALOG,
-  CLOSE_MERGE_DIALOG
+  OPEN_VERIFY_DIALOG,
+  SET_ANALYZE_DATASET,
+  SET_ROUTE
 } from "./actions";
-import { IVerifyDialogProps } from "../../typings/store";
-import { DIALOGS } from "../../typings/constants";
 
 export interface IInterfacePersistedState {
+  analyzeDatasetName: string | undefined;
   route: IRouteOption;
 }
 
@@ -20,6 +22,7 @@ export interface IInterfaceMemoryState {
 }
 
 export const EMPTY_PERSISTED_STATE: IInterfacePersistedState = {
+  analyzeDatasetName: undefined,
   route: { url: IUrlOptions.HOME }
 };
 
@@ -50,5 +53,8 @@ export const interfaceReducer = TypedReducer.builder<IInterfaceState>()
   )
   .withHandler(OPEN_VERIFY_DIALOG.TYPE, (state, verifyDialogProps) =>
     setWith(state, { openDialog: DIALOGS.VERIFY_DIALOG, verifyDialogProps })
+  )
+  .withHandler(SET_ANALYZE_DATASET.TYPE, (state, analyzeDatasetName) =>
+    setWith(state, { analyzeDatasetName })
   )
   .build();

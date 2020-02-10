@@ -21,3 +21,7 @@ export const OPEN_VERIFY_DIALOG = TypedAction.define(
 export const CLOSE_VERIFY_DIALOG = TypedAction.defineWithoutPayload(
   "interface/close-verify-dialog"
 )();
+
+export const SET_ANALYZE_DATASET = TypedAction.define(
+  "interface/analyze-dataset"
+)<string | undefined>();

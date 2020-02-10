@@ -1,0 +1,24 @@
+@import "../../utils/looking-glass.scss";
+
+.datasets-container {
+  width: 500px;
+  max-height: 500px;
+  box-shadow: $box-shadow-border;
+  overflow-y: auto;
+  border-radius: 3px;
+}
+
+.title {
+  color: $muted-text-color;
+  margin-bottom: 5px;
+}
+
+.single-dataset {
+  cursor: pointer;
+  padding: 10px;
+  box-shadow: 0 1px $muted-text-color;
+  
+  &:hover {
+    background: $hover-color;
+  }
+}
