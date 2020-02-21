@@ -6,7 +6,7 @@
   "typings": "dist/index.d.ts",
   "dependencies": {
     "fs-extra": "^8.1.0",
-    "speedtest-net": "^1.6.0",
+    "speedtest-net": "^2.0.0",
     "uuid": "^3.3.3"
   },
   "devDependencies": {
