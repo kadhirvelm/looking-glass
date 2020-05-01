@@ -8,7 +8,9 @@
     "build": "webpack",
     "dev": "webpack --watch",
     "lint": "eslint . --ext .ts,.tsx",
-    "start": "electron ./dist/index.js"
+    "start": "electron ./dist/index.js",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "sideEffects": false,
   "repository": {
@@ -23,7 +25,9 @@
   "homepage": "https://github.com/kadhirvelm/looking-glass#readme",
   "dependencies": {
     "@looking-glass/application-server": "^1.0.0",
-    "electron": "^8.0.0"
+    "electron": "^8.0.0",
+    "snyk": "^1.316.1"
   },
-  "devDependencies": {}
+  "devDependencies": {},
+  "snyk": true
 }
