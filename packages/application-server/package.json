@@ -7,7 +7,9 @@
   "scripts": {
     "build": "tsc --project . -d",
     "dev": "yarn build --watch",
-    "lint": "eslint . --ext .ts"
+    "lint": "eslint . --ext .ts",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "sideEffects": false,
   "repository": {
@@ -22,6 +24,8 @@
   "homepage": "https://github.com/kadhirvelm/looking-glass#readme",
   "dependencies": {
     "@looking-glass/application-scripts": "^1.0.0",
-    "electron": "^8.0.0"
-  }
+    "electron": "^8.0.0",
+    "snyk": "^1.316.1"
+  },
+  "snyk": true
 }
