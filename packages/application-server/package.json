@@ -22,6 +22,6 @@
   "homepage": "https://github.com/kadhirvelm/looking-glass#readme",
   "dependencies": {
     "@looking-glass/application-scripts": "^1.0.0",
-    "electron": "^8.0.0"
+    "electron": "^9.0.0"
   }
 }
