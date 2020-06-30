@@ -5,13 +5,13 @@
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
   "dependencies": {
-    "fs-extra": "^8.1.0",
+    "fs-extra": "^9.0.0",
     "speedtest-net": "^1.6.0",
     "uuid": "^3.3.3"
   },
   "devDependencies": {
     "@types/cli-progress": "^3.4.1",
-    "@types/fs-extra": "^8.0.1",
+    "@types/fs-extra": "^9.0.0",
     "@types/node": "^12.12.8",
     "@types/uuid": "^3.4.6",
     "typescript": "^3.7.2"
